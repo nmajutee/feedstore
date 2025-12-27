@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" fill="currentColor" role="img" aria-label="Goat icon">
+  <path d="M20 20c0-6 4-10 10-10h4c6 0 10 4 10 10v12c0 6-4 10-10 10h-4c-6 0-10-4-10-10V20z" stroke="currentColor" stroke-width="2" fill="none"/>
+  <path d="M20 20l-8-10M44 20l8-10" stroke="currentColor" stroke-width="2"/>
+  <path d="M32 42v10M24 42v10M40 42v10" stroke="currentColor" stroke-width="2"/>
+  <circle cx="28" cy="26" r="2" fill="currentColor"/>
+  <circle cx="36" cy="26" r="2" fill="currentColor"/>
+</svg>

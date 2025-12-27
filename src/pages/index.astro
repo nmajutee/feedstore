@@ -1,0 +1,1018 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import { categories, products } from '../data/products';
+import { Icon } from 'astro-icon/components';
+import ProductCard from '../components/ProductCard.astro';
+
+// Get Best Sellers (ensure we have 12)
+let bestSellers = products.filter(p => p.bestSeller);
+if (bestSellers.length < 12) {
+    const others = products.filter(p => !p.bestSeller);
+    bestSellers = [...bestSellers, ...others].slice(0, 12);
+} else {
+    bestSellers = bestSellers.slice(0, 12);
+}
+
+const blogPosts = [
+    {
+        title: 'Maximizing Milk Yield in Dairy Cattle',
+        excerpt: 'Practical nutrition tweaks that improve output without stressing the herd.',
+        image: '/images/blog1.jpg',
+        date: 'Dec 12, 2025',
+        author: 'AgroPro Nutrition Team'
+    },
+    {
+        title: 'Winter Care for Poultry Flocks',
+        excerpt: 'Keep feed conversion and egg quality steady in cold weather.',
+        image: '/images/blog2.jpg',
+        date: 'Nov 28, 2025',
+        author: 'Poultry Health Expert'
+    },
+    {
+        title: 'Protein Efficiency in Pig Finishing',
+        excerpt: 'Balancing cost and growth rate in the final production phase.',
+        image: '/images/blog3.jpg',
+        date: 'Nov 15, 2025',
+        author: 'Swine Specialist'
+    }
+];
+
+const faqs = [
+    {
+        question: "Do you offer bulk delivery?",
+        answer: "Yes, we offer bulk delivery for all our feed products. Contact us for a custom quote on large orders."
+    },
+    {
+        question: "Is your feed medicated?",
+        answer: "We offer both medicated and non-medicated options, particularly for chick starters. Check the product details for specifics."
+    },
+    {
+        question: "Do you have certified organic options?",
+        answer: "Absolutely! We have a dedicated line of USDA Certified Organic feeds for poultry, livestock, and more."
+    },
+    {
+        question: "How do I determine the right feed for my animals?",
+        answer: "Our product pages include detailed life-stage and animal recommendations. You can also contact our nutrition experts for advice."
+    }
+];
+---
+
+<Layout title="AgroPro - Premium Livestock Feed Solutions">
+   <Header />
+
+    <main class="home" id="top">
+        <!-- HERO (Uses the real banner image via /css/style.css) -->
+        <section class="hero-section home-hero" aria-label="AgroPro hero">
+            <div class="container">
+                <div class="hero-content">
+                    <p class="home-hero__eyebrow">Precision nutrition • Farm-first support</p>
+                    <h1>Feed built for performance.</h1>
+                    <p>
+                        Premium formulas for poultry, cattle, pigs, and specialty livestock—designed to improve growth,
+                        feed conversion, and overall herd health.
+                    </p>
+                    <div class="home-hero__actions">
+                        <a href="/products" class="btn-outline">Browse Feeds</a>
+                        <a href="/contact" class="btn-outline">Get a Quote</a>
+                    </div>
+                    <div class="home-hero__stats" role="list">
+                        <div class="home-hero__stat" role="listitem">
+                            <span class="home-hero__statNumber">Quality</span>
+                            <span class="home-hero__statLabel">Consistent ingredients</span>
+                        </div>
+                        <div class="home-hero__stat" role="listitem">
+                            <span class="home-hero__statNumber">Science</span>
+                            <span class="home-hero__statLabel">Balanced formulations</span>
+                        </div>
+                        <div class="home-hero__stat" role="listitem">
+                            <span class="home-hero__statNumber">Support</span>
+                            <span class="home-hero__statLabel">Help choosing the right feed</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- CATEGORIES (Show 4 first, navigate to 5th) -->
+        <section class="section-padding bg-light" id="categories" aria-label="Feed categories">
+            <div class="container">
+                <div class="row align-items-end g-3 mb-4">
+                    <div class="col-md-8">
+                        <h2 class="home-section-title">Shop by Category</h2>
+                        <p class="home-section-lead">Specialized nutrition for each species, stage, and production goal.</p>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="home-cats__controls">
+                            <a href="/products" class="home-cats__all">View All</a>
+                            <div class="home-cats__nav" aria-label="Category carousel controls">
+                                <button id="homeCatsPrev" class="home-icon-btn" type="button" aria-label="Previous categories">
+                                    <Icon name="mdi:chevron-left" size={22} />
+                                </button>
+                                <button id="homeCatsNext" class="home-icon-btn" type="button" aria-label="Next categories">
+                                    <Icon name="mdi:chevron-right" size={22} />
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="home-cats__viewport">
+                    <div class="home-cats__track" id="homeCatsTrack">
+                        {categories.map((category) => (
+                            <div class="home-cats__slide">
+                                <a class="category-card home-cats__card" href={`/${category.slug}`} aria-label={`Explore ${category.title}`}>
+                                    <div class="home-cats__icon" aria-hidden="true">
+                                        <Icon name={category.icon} size={44} />
+                                    </div>
+                                    <h3>{category.title}</h3>
+                                    <p class="home-cats__desc">{category.description}</p>
+                                    <span class="home-cats__cta">
+                                        Explore <Icon name="mdi:arrow-right" size={18} />
+                                    </span>
+                                </a>
+                            </div>
+                        ))}
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- BEST SELLERS -->
+        <section class="section-padding" id="best-sellers" aria-label="Best sellers">
+            <div class="container">
+                <div class="text-center mb-5">
+                    <h2 class="home-section-title">Best Sellers</h2>
+                    <p class="home-section-lead">Top-performing feeds farmers reorder most.</p>
+                </div>
+                <div class="row g-3 g-md-4">
+                    {bestSellers.map((product) => (
+                        <div class="col-12 col-sm-6 col-lg-4 col-xl-3">
+                            <ProductCard product={product} />
+                        </div>
+                    ))}
+                </div>
+                <div class="text-center mt-5">
+                    <a href="/products" class="btn-custom">See Full Catalog</a>
+                </div>
+            </div>
+        </section>
+
+        <!-- ABOUT -->
+        <section class="section-padding about-section" id="about" aria-label="About AgroPro">
+            <div class="container">
+                <div class="row align-items-center g-5">
+                    <div class="col-lg-6">
+                        <div class="about-img">
+                            <img src="/images/about_img.jpg" alt="Feed production and quality control" loading="lazy" />
+                        </div>
+                    </div>
+                    <div class="col-lg-6">
+                        <h2 class="home-section-title">Built for Modern Agriculture</h2>
+                        <p class="home-section-lead">
+                            We combine practical farm experience with nutrition science to deliver consistent, reliable feed.
+                            Choose by animal, stage, and target performance—then let our team help you fine-tune.
+                        </p>
+
+                        <div class="row g-3 mt-3">
+                            <div class="col-sm-6">
+                                <div class="home-feature">
+                                    <Icon name="mdi:flask-outline" size={24} />
+                                    <div>
+                                        <h3 class="home-feature__title">Science-led Formulas</h3>
+                                        <p class="home-feature__text">Balanced protein, energy, and minerals for results.</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-6">
+                                <div class="home-feature">
+                                    <Icon name="mdi:shield-check-outline" size={24} />
+                                    <div>
+                                        <h3 class="home-feature__title">Quality You Can Trust</h3>
+                                        <p class="home-feature__text">Reliable sourcing and consistent production runs.</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-6">
+                                <div class="home-feature">
+                                    <Icon name="mdi:leaf" size={24} />
+                                    <div>
+                                        <h3 class="home-feature__title">Sustainable Options</h3>
+                                        <p class="home-feature__text">Organic and responsible formulations available.</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-6">
+                                <div class="home-feature">
+                                    <Icon name="mdi:account-voice" size={24} />
+                                    <div>
+                                        <h3 class="home-feature__title">Farm-first Support</h3>
+                                        <p class="home-feature__text">Quick help choosing and ordering the right feed.</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="home-about__actions mt-4">
+                            <a href="/about" class="btn-custom">About AgroPro</a>
+                            <a href="/contact" class="home-btn-outline-dark">Talk to Us</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- HOW IT WORKS -->
+        <section class="section-padding bg-light" id="how-it-works" aria-label="How it works">
+            <div class="container">
+                <div class="text-center mb-5">
+                    <h2 class="home-section-title">How It Works</h2>
+                    <p class="home-section-lead">A simple flow—from selecting feed to delivery.</p>
+                </div>
+
+                <div class="row g-4">
+                    <div class="col-lg-4">
+                        <div class="home-step">
+                            <div class="home-step__icon" aria-hidden="true"><Icon name="mdi:magnify" size={28} /></div>
+                            <h3 class="home-step__title">1. Choose Your Feed</h3>
+                            <p class="home-step__text">Browse by animal and stage. Compare formulas quickly.</p>
+                        </div>
+                    </div>
+                    <div class="col-lg-4">
+                        <div class="home-step">
+                            <div class="home-step__icon" aria-hidden="true"><Icon name="mdi:message-text-outline" size={28} /></div>
+                            <h3 class="home-step__title">2. Send an Enquiry</h3>
+                            <p class="home-step__text">Tell us volumes and timing. We’ll confirm availability and pricing.</p>
+                        </div>
+                    </div>
+                    <div class="col-lg-4">
+                        <div class="home-step">
+                            <div class="home-step__icon" aria-hidden="true"><Icon name="mdi:truck-delivery-outline" size={28} /></div>
+                            <h3 class="home-step__title">3. Delivery to Farm</h3>
+                            <p class="home-step__text">Fast handling and reliable delivery—so your operation stays on track.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- FAQ -->
+        <section class="section-padding home-faq" id="faq" aria-label="Frequently asked questions">
+            <div class="container">
+                <div class="row align-items-start g-5">
+                    <div class="col-lg-5">
+                        <div class="home-faq__intro">
+                            <p class="home-faq__kicker">Support</p>
+                            <h2 class="home-section-title">Answers, fast.</h2>
+                            <p class="home-section-lead">
+                                Clear guidance on bulk delivery, medicated options, and choosing the right formula for each stage.
+                            </p>
+
+                            <div class="home-faq__card">
+                                <div class="home-faq__cardIcon" aria-hidden="true">
+                                    <Icon name="mdi:headset" size={22} />
+                                </div>
+                                <div>
+                                    <div class="home-faq__cardTitle">Need help choosing feed?</div>
+                                    <div class="home-faq__cardText">Send an enquiry and we’ll recommend a suitable option.</div>
+                                    <div class="home-faq__cardActions">
+                                        <button type="button" class="btn-custom" onclick={`window.openEnquiryModal('Product Recommendation')`}>
+                                            Get Recommendation
+                                        </button>
+                                        <a class="home-faq__cardLink" href="/products">Browse Products</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-7">
+                        <div class="accordion home-accordion" id="faqAccordion">
+                            {faqs.map((faq, index) => (
+                                <div class="card home-accordion__item">
+                                    <div class="card-header" id={`heading${index}`}>
+                                        <h3 class="mb-0">
+                                            <button
+                                                class={`btn btn-link home-accordion__button collapsed`}
+                                                type="button"
+                                                data-toggle="collapse"
+                                                data-target={`#collapse${index}`}
+                                                aria-expanded="false"
+                                                aria-controls={`collapse${index}`}
+                                            >
+                                                <span class="home-accordion__q">
+                                                    <span class="home-accordion__qBadge" aria-hidden="true">Q{String(index + 1).padStart(2, '0')}</span>
+                                                    {faq.question}
+                                                </span>
+                                            </button>
+                                        </h3>
+                                    </div>
+                                    <div
+                                        id={`collapse${index}`}
+                                        class="collapse"
+                                        aria-labelledby={`heading${index}`}
+                                        data-parent="#faqAccordion"
+                                    >
+                                        <div class="card-body home-accordion__body">
+                                            <div class="home-accordion__answer">{faq.answer}</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            ))}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- CTA -->
+        <section class="home-cta" aria-label="Call to action">
+            <div class="container">
+                <div class="home-cta__inner">
+                    <div class="row align-items-center g-4">
+                        <div class="col-lg-8">
+                            <p class="home-cta__kicker">Bulk orders • Fast delivery • Nutrition support</p>
+                            <h2 class="home-cta__title">Ready to improve feed performance on your farm?</h2>
+                            <p class="home-cta__text">
+                                Tell us your animal type, stage, and target outcome. We’ll help you pick the right formula and quantities.
+                            </p>
+                        </div>
+                        <div class="col-lg-4">
+                            <div class="home-cta__actions">
+                                <a href="/products" class="btn-custom">Explore Feeds</a>
+                                <button type="button" class="btn-outline" onclick={`window.openEnquiryModal('Bulk Order Quote')`}>
+                                    Request Quote
+                                </button>
+                            </div>
+                            <div class="home-cta__secondary">
+                                <span class="home-cta__secondaryLabel">Or call:</span>
+                                <a class="home-cta__secondaryLink" href="tel:+15551234567">+1 (555) 123-4567</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- BLOG -->
+        <section class="section-padding bg-light" id="insights" aria-label="Insights">
+            <div class="container">
+                <div class="row align-items-end g-3 mb-4">
+                    <div class="col-md-8">
+                        <h2 class="home-section-title">Insights</h2>
+                        <p class="home-section-lead">Actionable tips for healthier animals and better performance.</p>
+                    </div>
+                    <div class="col-md-4 text-md-end">
+                        <a href="/blog" class="home-cats__all">Visit Blog</a>
+                    </div>
+                </div>
+
+                <div class="row g-4">
+                    {blogPosts.map((post) => (
+                        <div class="col-lg-4">
+                            <article class="home-post">
+                                <a href="/blog" class="home-post__img" aria-label={post.title}>
+                                    <img src={post.image} alt={post.title} loading="lazy" />
+                                </a>
+                                <div class="home-post__body">
+                                    <div class="home-post__meta">
+                                        <span><Icon name="mdi:calendar" size={16} /> {post.date}</span>
+                                        <span><Icon name="mdi:account" size={16} /> {post.author}</span>
+                                    </div>
+                                    <h3 class="home-post__title">{post.title}</h3>
+                                    <p class="home-post__text">{post.excerpt}</p>
+                                    <a href="/blog" class="home-post__link">Read more <Icon name="mdi:arrow-right" size={18} /></a>
+                                </div>
+                            </article>
+                        </div>
+                    ))}
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <Footer />
+
+    <style>
+        /* Page-specific styling only (uses the global design tokens in /css/style.css) */
+        .home-section-title {
+            font-size: clamp(1.8rem, 2.2vw, 2.6rem);
+            margin-bottom: 0.75rem;
+        }
+
+        .home-section-lead {
+            max-width: 55ch;
+            margin: 0;
+            color: rgba(38, 70, 83, 0.85);
+            font-size: 1.05rem;
+        }
+
+        .home-hero {
+            height: min(82vh, 820px);
+        }
+
+        .home-hero__eyebrow {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            justify-content: center;
+            padding: 8px 14px;
+            border-radius: 999px;
+            background: rgba(255, 255, 255, 0.14);
+            border: 1px solid rgba(255, 255, 255, 0.24);
+            color: rgba(255, 255, 255, 0.92);
+            margin: 0 0 16px;
+            backdrop-filter: blur(6px);
+        }
+
+        .home-hero__actions {
+            display: flex;
+            gap: 12px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .home-hero__stats {
+            display: grid;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            gap: 12px;
+            margin: 28px auto 0;
+            max-width: 860px;
+        }
+
+        .home-hero__stat {
+            background: rgba(255, 255, 255, 0.12);
+            border: 1px solid rgba(255, 255, 255, 0.22);
+            border-radius: 12px;
+            padding: 14px 16px;
+            backdrop-filter: blur(8px);
+        }
+
+        .home-hero__statNumber {
+            display: block;
+            font-weight: 800;
+            letter-spacing: 0.3px;
+            color: #fff;
+        }
+
+        .home-hero__statLabel {
+            display: block;
+            color: rgba(255, 255, 255, 0.88);
+            font-size: 0.95rem;
+            margin-top: 2px;
+        }
+
+        .home-cats__controls {
+            display: flex;
+            align-items: center;
+            justify-content: flex-start;
+            gap: 12px;
+        }
+
+        @media (min-width: 768px) {
+            .home-cats__controls {
+                justify-content: flex-end;
+            }
+        }
+
+        .home-cats__all {
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-size: 0.85rem;
+        }
+
+        .home-cats__nav {
+            display: inline-flex;
+            gap: 10px;
+        }
+
+        .home-icon-btn {
+            width: 42px;
+            height: 42px;
+            border-radius: 999px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            border: 1px solid rgba(38, 70, 83, 0.18);
+            background: #fff;
+            color: var(--primary-color);
+            transition: transform 0.15s ease, background 0.2s ease, opacity 0.2s ease;
+        }
+
+        .home-icon-btn:hover {
+            transform: translateY(-1px);
+            background: var(--bg-light);
+        }
+
+        .home-icon-btn:disabled {
+            opacity: 0.45;
+            cursor: not-allowed;
+        }
+
+        .home-cats__viewport {
+            overflow: hidden;
+        }
+
+        .home-cats__track {
+            display: flex;
+            gap: 24px;
+            transition: transform 450ms cubic-bezier(0.2, 0.8, 0.2, 1);
+            will-change: transform;
+        }
+
+        .home-cats__slide {
+            flex: 0 0 calc((100% - 72px) / 4);
+        }
+
+        @media (max-width: 991.98px) {
+            .home-cats__slide {
+                flex-basis: calc((100% - 24px) / 2);
+            }
+        }
+
+        @media (max-width: 575.98px) {
+            .home-cats__slide {
+                flex-basis: 100%;
+            }
+        }
+
+        .home-cats__card {
+            display: block;
+            height: 100%;
+        }
+
+        .home-cats__icon {
+            width: 82px;
+            height: 82px;
+            border-radius: 999px;
+            margin: 0 auto 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: var(--bg-light);
+            color: var(--primary-color);
+            transition: transform 0.2s ease, background 0.2s ease;
+        }
+
+        .home-cats__card:hover .home-cats__icon {
+            background: rgba(233, 196, 106, 0.25);
+            transform: translateY(-2px);
+        }
+
+        .home-cats__desc {
+            color: rgba(38, 70, 83, 0.85);
+            margin-bottom: 14px;
+        }
+
+        .home-cats__cta {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            font-weight: 800;
+            color: var(--secondary-color);
+        }
+
+        .home-feature {
+            display: flex;
+            gap: 12px;
+            padding: 14px 14px;
+            border-radius: 12px;
+            background: var(--bg-light);
+            border: 1px solid rgba(38, 70, 83, 0.08);
+        }
+
+        .home-feature svg {
+            flex: 0 0 auto;
+            color: var(--secondary-color);
+            margin-top: 2px;
+        }
+
+        .home-feature__title {
+            font-size: 1rem;
+            margin: 0;
+            color: var(--primary-color);
+        }
+
+        .home-feature__text {
+            margin: 4px 0 0;
+            color: rgba(38, 70, 83, 0.85);
+            font-size: 0.95rem;
+        }
+
+        .home-about__actions {
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+            align-items: center;
+        }
+
+        .home-btn-outline-dark {
+            padding: 12px 30px;
+            border-radius: 5px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            border: 1px solid var(--secondary-color);
+            color: var(--secondary-color);
+            display: inline-block;
+            background: transparent;
+            transition: all 0.3s ease;
+        }
+
+        .home-btn-outline-dark:hover {
+            background: var(--secondary-color);
+            color: var(--bg-white);
+        }
+
+        .home-step {
+            background: var(--bg-white);
+            border: 1px solid rgba(38, 70, 83, 0.08);
+            border-radius: 14px;
+            padding: 22px;
+            height: 100%;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.04);
+            transition: transform 0.18s ease;
+        }
+
+        .home-step:hover {
+            transform: translateY(-3px);
+        }
+
+        .home-step__icon {
+            width: 46px;
+            height: 46px;
+            border-radius: 12px;
+            background: rgba(233, 196, 106, 0.25);
+            color: var(--primary-color);
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 12px;
+        }
+
+        .home-step__title {
+            font-size: 1.15rem;
+            margin-bottom: 8px;
+        }
+
+        .home-step__text {
+            margin: 0;
+            color: rgba(38, 70, 83, 0.85);
+        }
+
+        .home-accordion__item {
+            border: 1px solid rgba(38, 70, 83, 0.08);
+            border-radius: 12px;
+            overflow: hidden;
+            margin-bottom: 12px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.03);
+            background: var(--bg-white);
+        }
+
+        .home-accordion__item .card-header {
+            background: var(--bg-white);
+            border-bottom: 1px solid rgba(38, 70, 83, 0.08);
+            padding: 0;
+        }
+
+        .home-accordion__button {
+            font-weight: 800;
+            color: var(--primary-color);
+            width: 100%;
+            text-align: left;
+            padding: 18px 18px;
+            white-space: normal;
+            text-decoration: none;
+            cursor: pointer;
+        }
+
+        .home-accordion__button:hover,
+        .home-accordion__button:focus {
+            text-decoration: none;
+            background: rgba(233, 196, 106, 0.16);
+            outline: none;
+        }
+
+        .home-faq__kicker {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 8px 14px;
+            border-radius: 999px;
+            background: rgba(233, 196, 106, 0.2);
+            color: var(--primary-color);
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-size: 0.8rem;
+            margin: 0 0 14px;
+        }
+
+        .home-faq__card {
+            margin-top: 18px;
+            display: flex;
+            gap: 14px;
+            align-items: flex-start;
+            background: var(--bg-white);
+            border: 1px solid rgba(38, 70, 83, 0.08);
+            border-radius: 14px;
+            padding: 18px;
+            box-shadow: 0 14px 35px rgba(0, 0, 0, 0.05);
+        }
+
+        .home-faq__cardIcon {
+            width: 42px;
+            height: 42px;
+            border-radius: 12px;
+            background: rgba(233, 196, 106, 0.25);
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--primary-color);
+            flex: 0 0 auto;
+        }
+
+        .home-faq__cardTitle {
+            font-weight: 900;
+            color: var(--primary-color);
+            margin-bottom: 4px;
+        }
+
+        .home-faq__cardText {
+            color: rgba(38, 70, 83, 0.85);
+            margin-bottom: 12px;
+        }
+
+        .home-faq__cardActions {
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+            align-items: center;
+        }
+
+        .home-faq__cardLink {
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-size: 0.85rem;
+        }
+
+        .home-accordion__q {
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .home-accordion__qBadge {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 6px 10px;
+            border-radius: 999px;
+            background: rgba(26, 77, 46, 0.08);
+            color: var(--primary-color);
+            font-weight: 900;
+            font-size: 0.8rem;
+            letter-spacing: 0.6px;
+            flex: 0 0 auto;
+        }
+
+        .home-accordion__body {
+            color: rgba(38, 70, 83, 0.88);
+            line-height: 1.7;
+        }
+
+        .home-cta {
+            padding: 0 0 80px;
+        }
+
+        .home-cta__inner {
+            border-radius: 18px;
+            overflow: hidden;
+            position: relative;
+            padding: 34px 28px;
+            background: linear-gradient(rgba(26, 77, 46, 0.88), rgba(26, 77, 46, 0.7)), url('/images/chose.jpg');
+            background-size: cover;
+            background-position: center;
+            color: var(--bg-white);
+            box-shadow: 0 18px 55px rgba(0, 0, 0, 0.18);
+        }
+
+        .home-cta__kicker {
+            margin: 0 0 10px;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-size: 0.85rem;
+            color: rgba(255, 255, 255, 0.9);
+        }
+
+        .home-cta__title {
+            margin: 0 0 10px;
+            color: var(--bg-white);
+            font-size: clamp(1.6rem, 2.1vw, 2.4rem);
+            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.25);
+        }
+
+        .home-cta__text {
+            margin: 0;
+            color: rgba(255, 255, 255, 0.88);
+            max-width: 60ch;
+            font-size: 1.05rem;
+        }
+
+        .home-cta__actions {
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+            justify-content: flex-start;
+        }
+
+        @media (min-width: 992px) {
+            .home-cta__actions {
+                justify-content: flex-end;
+            }
+        }
+
+        .home-cta__secondary {
+            margin-top: 12px;
+            display: flex;
+            gap: 10px;
+            align-items: center;
+            justify-content: flex-start;
+            flex-wrap: wrap;
+            color: rgba(255, 255, 255, 0.9);
+        }
+
+        @media (min-width: 992px) {
+            .home-cta__secondary {
+                justify-content: flex-end;
+            }
+        }
+
+        .home-cta__secondaryLabel {
+            font-weight: 700;
+        }
+
+        .home-cta__secondaryLink {
+            color: var(--accent-color);
+            font-weight: 900;
+        }
+
+        .home-post {
+            height: 100%;
+            border-radius: 14px;
+            overflow: hidden;
+            background: var(--bg-white);
+            border: 1px solid rgba(38, 70, 83, 0.08);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.04);
+            transition: transform 0.18s ease;
+        }
+
+        .home-post:hover {
+            transform: translateY(-3px);
+        }
+
+        .home-post__img {
+            display: block;
+            position: relative;
+        }
+
+        .home-post__img img {
+            width: 100%;
+            height: 220px;
+            object-fit: cover;
+            display: block;
+        }
+
+        .home-post__body {
+            padding: 18px 18px 20px;
+        }
+
+        .home-post__meta {
+            display: flex;
+            gap: 14px;
+            flex-wrap: wrap;
+            color: rgba(38, 70, 83, 0.72);
+            font-weight: 600;
+            font-size: 0.9rem;
+            margin-bottom: 10px;
+        }
+
+        .home-post__meta span {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .home-post__title {
+            font-size: 1.15rem;
+            margin-bottom: 10px;
+            color: var(--primary-color);
+        }
+
+        .home-post__text {
+            margin: 0 0 12px;
+            color: rgba(38, 70, 83, 0.85);
+        }
+
+        .home-post__link {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            font-weight: 800;
+        }
+
+        @media (max-width: 767.98px) {
+            .home-hero {
+                padding: 100px 0 60px;
+                text-align: center;
+            }
+            .home-hero h1 {
+                font-size: 2.5rem;
+            }
+            .home-hero__stats {
+                grid-template-columns: 1fr;
+                gap: 20px;
+                margin-top: 30px;
+            }
+            .home-hero__actions {
+                flex-direction: column;
+                gap: 15px;
+                padding: 0 20px;
+            }
+            .home-hero__actions a {
+                width: 100%;
+                text-align: center;
+            }
+            .home-section-title {
+                font-size: 2rem;
+            }
+            .home-about__content {
+                padding-left: 0;
+                margin-top: 30px;
+            }
+        }
+    </style>
+
+    <script>
+        // Category carousel (4-up on desktop, 2-up on tablet, 1-up on mobile)
+        const track = document.getElementById('homeCatsTrack');
+        const prevBtn = document.getElementById('homeCatsPrev');
+        const nextBtn = document.getElementById('homeCatsNext');
+
+        if (track && prevBtn && nextBtn) {
+            const getVisibleCount = () => {
+                if (window.matchMedia('(max-width: 575.98px)').matches) return 1;
+                if (window.matchMedia('(max-width: 991.98px)').matches) return 2;
+                return 4;
+            };
+
+            const getGap = () => {
+                const style = window.getComputedStyle(track);
+                const gap = style.columnGap || style.gap || '0px';
+                const value = Number.parseFloat(gap);
+                return Number.isFinite(value) ? value : 0;
+            };
+
+            let currentIndex = 0;
+
+            const measure = () => {
+                const first = track.children.item(0);
+                if (!(first instanceof HTMLElement)) return { slideWidth: 0, maxIndex: 0 };
+
+                const slideWidth = first.getBoundingClientRect().width + getGap();
+                const visible = getVisibleCount();
+                const maxIndex = Math.max(0, track.children.length - visible);
+                return { slideWidth, maxIndex };
+            };
+
+            const render = () => {
+                const { slideWidth, maxIndex } = measure();
+                currentIndex = Math.min(Math.max(0, currentIndex), maxIndex);
+                track.style.transform = `translateX(${-currentIndex * slideWidth}px)`;
+                (prevBtn as HTMLButtonElement).disabled = currentIndex === 0;
+                (nextBtn as HTMLButtonElement).disabled = currentIndex === maxIndex;
+            };
+
+            const goPrev = () => {
+                currentIndex -= 1;
+                render();
+            };
+
+            const goNext = () => {
+                currentIndex += 1;
+                render();
+            };
+
+            prevBtn.addEventListener('click', goPrev);
+            nextBtn.addEventListener('click', goNext);
+            window.addEventListener('resize', () => window.requestAnimationFrame(render));
+
+            // Initial paint
+            window.requestAnimationFrame(render);
+        }
+    </script>
+</Layout>

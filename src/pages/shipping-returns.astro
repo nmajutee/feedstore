@@ -1,0 +1,104 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+---
+
+<Layout title="Shipping & Returns - AgroPro">
+  <Header />
+  <div class="page-header">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12">
+          <div class="titlepage text_align_center">
+            <h2>Shipping & Returns</h2>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="section-padding">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-10 offset-md-1">
+          <div class="policy-content">
+            <h3>Shipping Policy</h3>
+
+            <h4>1. Delivery Areas</h4>
+            <p>We currently ship to all 48 contiguous United States. For Alaska, Hawaii, and international orders, please contact our Bulk Orders team for a custom freight quote.</p>
+
+            <h4>2. Shipping Methods</h4>
+            <ul>
+              <li><strong>Standard Ground:</strong> For orders under 150 lbs, we utilize standard carriers (UPS/FedEx). Delivery typically takes 3-5 business days.</li>
+              <li><strong>LTL Freight:</strong> For orders over 150 lbs or pallet quantities, we ship via LTL (Less Than Truckload) freight. A liftgate service is included for residential deliveries.</li>
+              <li><strong>Local Delivery:</strong> Available within a 50-mile radius of our Agriville warehouse.</li>
+            </ul>
+
+            <h4>3. Shipping Costs</h4>
+            <p>Shipping costs are calculated based on weight and distance. Free shipping is available for select local delivery zones on orders over $500.</p>
+
+            <hr style="margin: 40px 0; border-top: 1px solid #eee;">
+
+            <h3>Return Policy</h3>
+
+            <h4>1. Return Window</h4>
+            <p>We accept returns on unopened, undamaged feed bags within 30 days of purchase. Due to biosecurity and safety regulations, we cannot accept returns on opened feed bags unless there is a proven quality defect.</p>
+
+            <h4>2. Defective Products</h4>
+            <p>If you receive a damaged or defective product, please contact us within 48 hours of delivery with photos of the damage. We will arrange for a replacement or full refund immediately.</p>
+
+            <h4>3. Return Process</h4>
+            <p>To initiate a return, please email returns@agropro.com with your order number. You will be responsible for return shipping costs unless the return is due to our error (e.g., incorrect item sent, defective product).</p>
+
+            <h4>4. Refunds</h4>
+            <p>Refunds are processed within 5-7 business days of receiving the returned item. Funds will be returned to the original payment method.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <Footer />
+</Layout>
+
+<style>
+  .page-header {
+    background: #f4f4f4;
+    padding: 60px 0;
+    margin-bottom: 40px;
+  }
+  .section-padding {
+    padding: 60px 0;
+  }
+  .policy-content h3 {
+    color: #264653;
+    margin-top: 0;
+    margin-bottom: 25px;
+    font-weight: 700;
+    font-size: 2rem;
+    border-bottom: 2px solid #e9c46a;
+    display: inline-block;
+    padding-bottom: 5px;
+  }
+  .policy-content h4 {
+    color: #2a9d8f;
+    margin-top: 25px;
+    margin-bottom: 15px;
+    font-weight: 600;
+    font-size: 1.2rem;
+  }
+  .policy-content p {
+    margin-bottom: 15px;
+    line-height: 1.6;
+    color: #555;
+  }
+  .policy-content ul {
+    margin-bottom: 20px;
+    padding-left: 20px;
+  }
+  .policy-content li {
+    margin-bottom: 10px;
+    list-style-type: disc;
+    color: #555;
+  }
+</style>

@@ -1,0 +1,249 @@
+---
+import { Icon } from 'astro-icon/components';
+
+interface Props {
+  animals: string[];
+  weights: string[];
+  minPrice: number;
+  maxPrice: number;
+}
+
+const { animals, weights, minPrice, maxPrice } = Astro.props;
+---
+
+<aside class="sidebar-filter">
+  <div class="filter-header">
+    <h3><Icon name="mdi:filter-variant" class="icon-inline" /> Filters</h3>
+    <button id="clear-filters" class="clear-btn">Clear All</button>
+  </div>
+
+  <div class="filter-group">
+    <h4>Price Range</h4>
+    <div class="price-inputs">
+      <input type="number" id="min-price" placeholder="Min" min="0" />
+      <span>-</span>
+      <input type="number" id="max-price" placeholder="Max" min="0" />
+    </div>
+    <button id="apply-price" class="apply-btn">Apply</button>
+  </div>
+
+  <div class="filter-group">
+    <h4>Animal</h4>
+    <div class="checkbox-list">
+      {animals.map(animal => (
+        <label class="checkbox-label">
+          <input type="checkbox" name="animal" value={animal} />
+          <span class="checkmark"></span>
+          {animal}
+        </label>
+      ))}
+    </div>
+  </div>
+
+  <div class="filter-group">
+    <h4>Weight</h4>
+    <div class="checkbox-list">
+      {weights.map(weight => (
+        <label class="checkbox-label">
+          <input type="checkbox" name="weight" value={weight} />
+          <span class="checkmark"></span>
+          {weight}
+        </label>
+      ))}
+    </div>
+  </div>
+</aside>
+
+<style>
+  .sidebar-filter {
+    background: #fff;
+    padding: 25px;
+    border-radius: 12px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+    border: 1px solid #eee;
+  }
+
+  .filter-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+    padding-bottom: 15px;
+    border-bottom: 1px solid #eee;
+  }
+
+  .filter-header h3 {
+    font-size: 1.2rem;
+    margin: 0;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .clear-btn {
+    background: none;
+    border: none;
+    color: #e76f51;
+    font-size: 0.85rem;
+    cursor: pointer;
+    text-decoration: underline;
+  }
+
+  .filter-group {
+    margin-bottom: 25px;
+  }
+
+  .filter-group h4 {
+    font-size: 1rem;
+    margin-bottom: 15px;
+    color: #264653;
+  }
+
+  .price-inputs {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 10px;
+  }
+
+  .price-inputs input {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    font-size: 0.9rem;
+  }
+
+  .apply-btn {
+    width: 100%;
+    background: transparent;
+    color: #2a9d8f;
+    border: 1px solid #2a9d8f;
+    padding: 8px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 0.9rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    transition: all 0.3s ease;
+  }
+
+  .apply-btn:hover {
+    background: #2a9d8f;
+    color: #fff;
+  }
+
+  .checkbox-list {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .checkbox-label {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    cursor: pointer;
+    font-size: 0.95rem;
+    color: #555;
+    user-select: none;
+  }
+
+  .checkbox-label input {
+    display: none;
+  }
+
+  .checkmark {
+    width: 18px;
+    height: 18px;
+    border: 2px solid #ddd;
+    border-radius: 4px;
+    position: relative;
+    transition: all 0.2s;
+  }
+
+  .checkbox-label input:checked + .checkmark {
+    background: #e9c46a;
+    border-color: #e9c46a;
+  }
+
+  .checkbox-label input:checked + .checkmark::after {
+    content: '';
+    position: absolute;
+    left: 5px;
+    top: 1px;
+    width: 5px;
+    height: 10px;
+    border: solid #264653;
+    border-width: 0 2px 2px 0;
+    transform: rotate(45deg);
+  }
+
+  .icon-inline {
+    vertical-align: middle;
+  }
+</style>
+
+<script>
+  // Simple Client-Side Filtering Logic
+  function initFilters() {
+    const productCards = document.querySelectorAll('.product-card');
+    const animalCheckboxes = document.querySelectorAll('input[name="animal"]');
+    const weightCheckboxes = document.querySelectorAll('input[name="weight"]');
+    const minPriceInput = document.getElementById('min-price') as HTMLInputElement;
+    const maxPriceInput = document.getElementById('max-price') as HTMLInputElement;
+    const applyPriceBtn = document.getElementById('apply-price');
+    const clearBtn = document.getElementById('clear-filters');
+
+    function filterProducts() {
+      const selectedAnimals = Array.from(animalCheckboxes)
+        .filter(cb => (cb as HTMLInputElement).checked)
+        .map(cb => (cb as HTMLInputElement).value);
+
+      const selectedWeights = Array.from(weightCheckboxes)
+        .filter(cb => (cb as HTMLInputElement).checked)
+        .map(cb => (cb as HTMLInputElement).value);
+
+      const minPrice = minPriceInput.value ? parseFloat(minPriceInput.value) : 0;
+      const maxPrice = maxPriceInput.value ? parseFloat(maxPriceInput.value) : Infinity;
+
+      productCards.forEach(card => {
+        const el = card as HTMLElement;
+        const animal = el.dataset.animal;
+        const weight = el.dataset.weight;
+        const price = parseFloat(el.dataset.price || '0');
+
+        const animalMatch = selectedAnimals.length === 0 || selectedAnimals.includes(animal || '');
+        const weightMatch = selectedWeights.length === 0 || selectedWeights.includes(weight || '');
+        const priceMatch = price >= minPrice && price <= maxPrice;
+
+        // Find the parent column (supports multiple column class patterns)
+        const parentCol = el.closest('[class*="col-"]');
+        if (animalMatch && weightMatch && priceMatch) {
+          parentCol?.classList.remove('d-none');
+        } else {
+          parentCol?.classList.add('d-none');
+        }
+      });
+    }
+
+    animalCheckboxes.forEach(cb => cb.addEventListener('change', filterProducts));
+    weightCheckboxes.forEach(cb => cb.addEventListener('change', filterProducts));
+    applyPriceBtn?.addEventListener('click', filterProducts);
+
+    clearBtn?.addEventListener('click', () => {
+      animalCheckboxes.forEach(cb => (cb as HTMLInputElement).checked = false);
+      weightCheckboxes.forEach(cb => (cb as HTMLInputElement).checked = false);
+      if(minPriceInput) minPriceInput.value = '';
+      if(maxPriceInput) maxPriceInput.value = '';
+      filterProducts();
+    });
+  }
+
+  // Run on load
+  initFilters();
+
+  // Run on view transitions if enabled
+  document.addEventListener('astro:page-load', initFilters);
+</script>

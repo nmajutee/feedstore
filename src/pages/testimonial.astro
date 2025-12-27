@@ -1,0 +1,105 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+---
+
+<Layout title="Testimonials - AgroPro">
+   <div class="full_bg">
+      <Header />
+   </div>
+
+   <!-- customers -->
+   <div class="customers">
+      <div class="clients_bg">
+         <div class="container">
+            <div class="row">
+               <div class="col-sm-12">
+                  <div class="titlepage text_align_left">
+                      <span>Our Customers</span>
+                      <h2>TESTIMONIALS</h2>
+                  </div>
+               </div>
+            </div>
+         </div>
+      </div>
+      <!-- start slider section -->
+      <div id="myCarousel" class="carousel slide clients_banner" data-ride="carousel">
+         <ol class="carousel-indicators">
+            <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+            <li data-target="#myCarousel" data-slide-to="1"></li>
+            <li data-target="#myCarousel" data-slide-to="2"></li>
+         </ol>
+         <div class="carousel-inner">
+            <div class="carousel-item active">
+               <div class="container">
+                  <div class="carousel-caption relative">
+                     <div class="row d_flex">
+                        <div class="col-md-2 col-sm-4">
+                           <div class="user">
+                              <figure><img src="/images/user1.png" alt="#"/></figure>
+                           </div>
+                        </div>
+                        <div class="col-md-10 col-sm-8">
+                           <div class="custom_bg">
+                              <h3>John Doe<br><span class="smail">Poultry Farmer</span></h3>
+                              <p>I've been using AgroPro's Layer Mash for two years now. My egg production has increased by 15% and the shell quality is outstanding. The delivery is always on time, and the feed is fresh. Highly recommended for any serious poultry operation.</p>
+                           </div>
+                        </div>
+                     </div>
+                  </div>
+               </div>
+            </div>
+            <div class="carousel-item">
+               <div class="container">
+                  <div class="carousel-caption relative">
+                     <div class="row d_flex">
+                        <div class="col-md-2 col-sm-4">
+                           <div class="user">
+                              <figure><img src="/images/user1.png" alt="#"/></figure>
+                           </div>
+                        </div>
+                        <div class="col-md-10 col-sm-8">
+                           <div class="custom_bg">
+                              <h3>Sarah Jenkins<br><span class="smail">Cattle Rancher</span></h3>
+                              <p>We switched our herd to AgroPro's Cattle Finisher last season, and the results were incredible. The marbling was excellent, and our average daily gain improved significantly. The nutrition team is also very helpful with custom mixes.</p>
+                           </div>
+                        </div>
+                     </div>
+                  </div>
+               </div>
+            </div>
+            <div class="carousel-item">
+               <div class="container">
+                  <div class="carousel-caption relative">
+                     <div class="row d_flex">
+                        <div class="col-md-2 col-sm-4">
+                           <div class="user">
+                              <figure><img src="/images/user1.png" alt="#"/></figure>
+                           </div>
+                        </div>
+                        <div class="col-md-10 col-sm-8">
+                           <div class="custom_bg">
+                              <h3>Mike Ross<br><span class="smail">Swine Producer</span></h3>
+                              <p>The Pig Grower pellets are the best value on the market. Consistent quality, no dust, and the pigs love it. Since switching, we've seen better feed conversion rates and healthier animals overall.</p>
+                           </div>
+                        </div>
+                     </div>
+                  </div>
+               </div>
+            </div>
+         </div>
+         <a class="carousel-control-prev" href="#myCarousel" role="button" data-slide="prev">
+         <i class="fa fa-angle-left" aria-hidden="true"></i>
+         <span class="sr-only">Previous</span>
+         </a>
+         <a class="carousel-control-next" href="#myCarousel" role="button" data-slide="next">
+         <i class="fa fa-angle-right" aria-hidden="true"></i>
+         <span class="sr-only">Next</span>
+         </a>
+      </div>
+   </div>
+   <!-- end customers -->
+
+   <Footer />
+</Layout>

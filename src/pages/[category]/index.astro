@@ -1,0 +1,119 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Header from '../../components/Header.astro';
+import Footer from '../../components/Footer.astro';
+import ProductCard from '../../components/ProductCard.astro';
+import SidebarFilter from '../../components/SidebarFilter.astro';
+import { categories, products } from '../../data/products';
+
+export function getStaticPaths() {
+  return categories.map(category => ({
+    params: { category: category.slug },
+    props: { category },
+  }));
+}
+
+const { category } = Astro.props;
+const categoryProducts = products.filter(p => p.topCategory === category.slug);
+
+// Extract unique filter values
+const animals = [...new Set(categoryProducts.map(p => p.animal))].filter(Boolean);
+const weights = [...new Set(categoryProducts.map(p => p.weight))].filter(Boolean);
+const prices = categoryProducts.map(p => p.price);
+const minPrice = prices.length ? Math.min(...prices) : 0;
+const maxPrice = prices.length ? Math.max(...prices) : 0;
+---
+
+<Layout title={`${category.name} - AgroPro`}>
+   <Header />
+
+   <div class="page-header">
+      <div class="container">
+         <div class="row">
+            <div class="col-md-12">
+               <div class="titlepage text_align_left">
+                  <span>Category</span>
+                  <h2>{category.name}</h2>
+                  <p>{category.description}</p>
+               </div>
+            </div>
+         </div>
+      </div>
+   </div>
+
+   <div class="section-padding">
+      <div class="container">
+         <!-- Subcategories Links -->
+         <div class="row mb-5">
+            <div class="col-md-12">
+               <div class="subcategories-list">
+                  <h3 class="h5 mb-3">Browse by Type:</h3>
+                  <div class="d-flex flex-wrap gap-2">
+                     {category.subCategories.map(sub => (
+                        <a href={`/${category.slug}/${sub.slug}`} class="subcategory-pill">{sub.name}</a>
+                     ))}
+                  </div>
+               </div>
+            </div>
+         </div>
+
+         <div class="row">
+            <!-- Sidebar -->
+            <div class="col-lg-3 mb-4">
+               <SidebarFilter
+                  animals={animals}
+                  weights={weights}
+                  minPrice={minPrice}
+                  maxPrice={maxPrice}
+               />
+            </div>
+
+            <!-- Product Grid -->
+            <div class="col-lg-9">
+               <div class="row g-3 g-md-4">
+                  {categoryProducts.length > 0 ? (
+                      categoryProducts.map((product) => (
+                      <div class="col-12 col-sm-6 col-lg-4">
+                          <ProductCard product={product} />
+                      </div>
+                      ))
+                  ) : (
+                      <div class="col-12">
+                          <div class="alert alert-info">
+                              No products found in this category yet. Please check back later.
+                          </div>
+                      </div>
+                  )}
+               </div>
+            </div>
+         </div>
+      </div>
+   </div>
+
+   <Footer />
+</Layout>
+
+<style>
+   .page-header {
+      background: #f8f9fa;
+      padding: 60px 0 30px;
+   }
+
+   .subcategory-pill {
+      display: inline-block;
+      padding: 8px 20px;
+      background: #fff;
+      border: 1px solid #ddd;
+      border-radius: 25px;
+      color: #264653;
+      text-decoration: none;
+      transition: all 0.2s;
+      font-size: 0.9rem;
+   }
+
+   .subcategory-pill:hover {
+      background: #e9c46a;
+      border-color: #e9c46a;
+      color: #fff;
+   }
+</style>

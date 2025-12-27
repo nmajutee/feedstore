@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" fill="currentColor" role="img" aria-label="Chicken icon">
+  <path d="M32 2C20 2 16 12 16 18c0 4 2 8 2 8s-6 4-6 10c0 8 6 14 14 14h12c8 0 14-6 14-14 0-6-6-10-6-10s2-4 2-8c0-6-4-16-16-16zM22 54v8h4v-8M38 54v8h4v-8" stroke="currentColor" stroke-width="2" fill="none"/>
+  <circle cx="36" cy="14" r="2" fill="currentColor"/>
+  <path d="M42 18h6l-6 6" stroke="currentColor" stroke-width="2"/>
+</svg>

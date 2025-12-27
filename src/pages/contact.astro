@@ -1,0 +1,74 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+---
+
+<Layout title="Contact Us - AgroPro">
+   <div class="full_bg">
+      <Header />
+   </div>
+
+   <!-- contact -->
+   <div class="contact">
+      <div class="container">
+         <div class="row">
+            <div class="col-md-12 ">
+               <div class="titlepage text_align_center">
+                  <span>Our Contact</span>
+                  <h2>Requste A Call Back</h2>
+               </div>
+            </div>
+            <div class="col-md-8 offset-md-2">
+               <form id="request" class="main_form">
+                  <div class="row">
+                     <div class="col-md-12 ">
+                        <input class="form_control" placeholder="Your Name" type="text" name="Name">
+                     </div>
+                     <div class="col-md-12">
+                        <input class="form_control" placeholder="Phone Number" type="text" name="Phone">
+                     </div>
+                     <div class="col-md-12">
+                        <input class="form_control" placeholder="Your Email" type="email" name="Email">
+                     </div>
+                     <div class="col-md-12">
+                        <textarea class="textarea" id="message-box" placeholder="Message" name="Message"></textarea>
+                     </div>
+                     <div class="col-md-12">
+                        <div class="checkbox-wrapper" style="margin-bottom: 20px; display: flex; align-items: center; gap: 10px;">
+                           <input type="checkbox" id="terms-contact" name="terms" required>
+                           <label for="terms-contact" style="margin: 0; color: #666;">I agree to the <a href="/terms-conditions" target="_blank" style="color: #2a9d8f; text-decoration: underline;">Terms & Conditions</a> and <a href="/privacy-policy" target="_blank" style="color: #2a9d8f; text-decoration: underline;">Privacy Policy</a>.</label>
+                        </div>
+                     </div>
+                     <div class="col-md-12">
+                        <div class="group_btn">
+                        <button class="send_btn">Send</button>
+                         <button class="send_btn">location</button>
+                      </div>
+                     </div>
+                  </div>
+               </form>
+            </div>
+         </div>
+      </div>
+       <div class="map-responsive">
+         <iframe src="https://www.google.com/maps/embed/v1/place?key=AIzaSyA0s1a7phLN0iaD6-UE7m4qP-z21pH0eSc&amp;q=Eiffel+Tower+Paris+France" width="600" height="430" frameborder="0" style="border:0; width: 100%;" allowfullscreen=""></iframe>
+      </div>
+   </div>
+   <!-- end contact -->
+
+   <script>
+      // Check for product query parameter
+      const urlParams = new URLSearchParams(window.location.search);
+      const product = urlParams.get('product');
+
+      if (product) {
+         const messageBox = document.getElementById('message-box') as HTMLTextAreaElement;
+         if (messageBox) {
+            messageBox.value = `I am interested in ${product}. Please contact me with more information.`;
+         }
+      }
+   </script>
+
+   <Footer />
+</Layout>

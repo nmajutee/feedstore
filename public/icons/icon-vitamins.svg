@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" fill="currentColor" role="img" aria-label="Supplements icon">
+  <path d="M20 16h24v40H20z" stroke="currentColor" stroke-width="2" fill="none"/>
+  <path d="M24 8h16v8H24z" stroke="currentColor" stroke-width="2" fill="none"/>
+  <path d="M32 28v16M24 36h16" stroke="currentColor" stroke-width="2"/>
+</svg>

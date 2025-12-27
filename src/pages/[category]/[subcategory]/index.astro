@@ -1,0 +1,68 @@
+---
+import Layout from '../../../layouts/Layout.astro';
+import Header from '../../../components/Header.astro';
+import Footer from '../../../components/Footer.astro';
+import { categories, products } from '../../../data/products';
+
+export function getStaticPaths() {
+  return categories.flatMap(category =>
+    category.subCategories.map(sub => ({
+      params: { category: category.slug, subcategory: sub.slug },
+      props: { category, subCategory: sub },
+    }))
+  );
+}
+
+const { category, subCategory } = Astro.props;
+const subCategoryProducts = products.filter(p =>
+    p.topCategory === category.slug && p.subCategory === subCategory.slug
+);
+---
+
+<Layout title={`${subCategory.name} - ${category.name} - AgroPro`}>
+   <div class="full_bg">
+      <Header />
+   </div>
+
+   <!-- products -->
+   <div class="services">
+      <div class="container">
+         <div class="row">
+            <div class="col-md-12">
+               <div class="titlepage text_align_left">
+                  <span>{category.name}</span>
+                  <h2>{subCategory.name}</h2>
+                  <p>Browse our selection of {subCategory.name} products.</p>
+                  <a href={`/${category.slug}`} class="read_more" style="margin-top: 20px; width: auto; padding: 0 20px; height: 40px; line-height: 40px; font-size: 14px;">&larr; Back to {category.name}</a>
+               </div>
+            </div>
+         </div>
+
+         <div class="row">
+            {subCategoryProducts.length > 0 ? (
+                subCategoryProducts.map((product) => (
+                <div class="col-md-4">
+                <div class="services_box_main">
+                    <div  class="services_box text_align_left">
+                        <figure><img src={product.image} alt="#"/></figure>
+                        <div class="veget">
+                            <h3>{product.name}</h3>
+                            <p>{product.description}</p>
+                        </div>
+                    </div>
+                    <a class="read_more" href={`/${category.slug}/${subCategory.slug}/${product.slug}`}>View Details</a>
+                </div>
+                </div>
+                ))
+            ) : (
+                <div class="col-md-12">
+                    <p>No products found in this subcategory yet.</p>
+                </div>
+            )}
+         </div>
+      </div>
+   </div>
+   <!-- end products -->
+
+   <Footer />
+</Layout>

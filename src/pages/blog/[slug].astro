@@ -1,0 +1,146 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Header from '../../components/Header.astro';
+import Footer from '../../components/Footer.astro';
+import { blogPosts } from '../../data/blog';
+
+export function getStaticPaths() {
+  return blogPosts.map(post => ({
+    params: { slug: post.slug },
+    props: { post },
+  }));
+}
+
+const { post } = Astro.props;
+---
+
+<Layout title={`${post.title} - AgroPro Insights`}>
+  <Header />
+
+  <div class="blog-header">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-8 offset-md-2 text-center">
+          <span class="post-category">{post.category}</span>
+          <h1>{post.title}</h1>
+          <div class="post-meta">
+            <span><i class="fa fa-calendar"></i> {post.date}</span>
+            <span><i class="fa fa-user"></i> {post.author}</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="section-padding">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-8 offset-md-2">
+          <div class="post-image">
+            <img src={post.image} alt={post.title} />
+          </div>
+
+          <div class="post-content" set:html={post.content} />
+
+          <div class="post-tags">
+            {post.tags.map(tag => (
+              <span class="tag">#{tag}</span>
+            ))}
+          </div>
+
+          <div class="post-navigation">
+            <a href="/blog" class="back-btn"><i class="fa fa-arrow-left"></i> Back to Insights</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <Footer />
+</Layout>
+
+<style>
+  .blog-header {
+    background: #264653;
+    color: #fff;
+    padding: 80px 0 60px;
+  }
+  .post-category {
+    background: #e9c46a;
+    color: #264653;
+    padding: 5px 15px;
+    border-radius: 20px;
+    font-weight: 700;
+    text-transform: uppercase;
+    font-size: 0.8rem;
+    display: inline-block;
+    margin-bottom: 20px;
+  }
+  .blog-header h1 {
+    color: #fff;
+    font-size: 2.5rem;
+    font-weight: 700;
+    margin-bottom: 20px;
+  }
+  .post-meta {
+    color: rgba(255,255,255,0.7);
+    font-size: 0.9rem;
+  }
+  .post-meta span {
+    margin: 0 10px;
+  }
+  .section-padding {
+    padding: 60px 0;
+  }
+  .post-image {
+    margin-bottom: 40px;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+  }
+  .post-image img {
+    width: 100%;
+    height: auto;
+  }
+  .post-content {
+    font-size: 1.1rem;
+    line-height: 1.8;
+    color: #444;
+    margin-bottom: 40px;
+  }
+  /* Styles for injected HTML content */
+  .post-content :global(h3) {
+    color: #264653;
+    font-weight: 700;
+    margin-top: 40px;
+    margin-bottom: 20px;
+  }
+  .post-content :global(p) {
+    margin-bottom: 20px;
+  }
+  .post-tags {
+    border-top: 1px solid #eee;
+    padding-top: 20px;
+    margin-bottom: 40px;
+  }
+  .tag {
+    display: inline-block;
+    background: #f4f4f4;
+    color: #666;
+    padding: 5px 12px;
+    border-radius: 15px;
+    margin-right: 10px;
+    font-size: 0.9rem;
+  }
+  .back-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    color: #264653;
+    font-weight: 600;
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+  .back-btn:hover {
+    color: #e9c46a;
+  }
+</style>

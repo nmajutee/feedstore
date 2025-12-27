@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" fill="currentColor" role="img" aria-label="Pig icon">
+  <ellipse cx="32" cy="32" rx="20" ry="16" stroke="currentColor" stroke-width="2" fill="none"/>
+  <path d="M16 24l-4-8M48 24l4-8" stroke="currentColor" stroke-width="2"/>
+  <circle cx="26" cy="28" r="2" fill="currentColor"/>
+  <circle cx="38" cy="28" r="2" fill="currentColor"/>
+  <ellipse cx="32" cy="38" rx="4" ry="3" stroke="currentColor" stroke-width="2" fill="none"/>
+</svg>

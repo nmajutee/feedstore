@@ -1,0 +1,128 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+---
+
+<Layout title="Feed FAQ - AgroPro">
+  <Header />
+  <div class="page-header">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12">
+          <div class="titlepage text_align_center">
+            <h2>Frequently Asked Questions</h2>
+            <p>Common questions about feed storage, usage, and nutrition</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="section-padding">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-8 offset-md-2">
+
+          <div class="faq-category">
+            <h3>Storage & Handling</h3>
+
+            <div class="faq-item">
+              <h4>How long does the feed last?</h4>
+              <p>Our pelleted feeds have a shelf life of approximately 6 months if stored correctly. Textured feeds (with molasses) should be used within 3-4 months, especially in summer.</p>
+            </div>
+
+            <div class="faq-item">
+              <h4>What is the best way to store feed?</h4>
+              <p>Store feed in a cool, dry place, away from direct sunlight. We recommend using galvanized metal trash cans or plastic bins with tight-fitting lids to keep out rodents and moisture.</p>
+            </div>
+
+            <div class="faq-item">
+              <h4>My feed looks moldy, can I still feed it?</h4>
+              <p><strong>No.</strong> Never feed moldy or insect-infested feed to animals. Mold can contain mycotoxins that are fatal to livestock, especially horses and poultry. Discard it immediately.</p>
+            </div>
+          </div>
+
+          <div class="faq-category">
+            <h3>Nutrition & Usage</h3>
+
+            <div class="faq-item">
+              <h4>Can I feed chicken feed to my ducks?</h4>
+              <p>It depends. Medicated chick starter (containing Amprolium) is generally safe, but some medications are toxic to waterfowl. We recommend using our "All-Flock" or "Waterfowl" specific feeds to be safe.</p>
+            </div>
+
+            <div class="faq-item">
+              <h4>Do I need to provide grit?</h4>
+              <p>If your poultry has access to the ground/pasture, they will find their own grit. If they are confined or eating only scratch grains, you should provide insoluble grit to help digestion.</p>
+            </div>
+
+            <div class="faq-item">
+              <h4>What is the difference between "Layer" and "Grower" feed?</h4>
+              <p>Layer feed has high calcium (3-4%) for eggshells and should only be fed to birds that are laying eggs (18+ weeks). Grower feed has higher protein and lower calcium for developing bodies. Feeding layer feed to chicks can cause kidney damage.</p>
+            </div>
+          </div>
+
+          <div class="faq-category">
+            <h3>Ordering & Custom</h3>
+
+            <div class="faq-item">
+              <h4>Do you offer custom mixes?</h4>
+              <p>Yes, for orders over 2 tons (1 pallet), we can mill custom rations. Please visit our <a href="/bulk-orders">Bulk Orders</a> page to request a quote.</p>
+            </div>
+
+            <div class="faq-item">
+              <h4>Is your feed non-GMO?</h4>
+              <p>We offer both conventional and Certified Organic / Non-GMO lines. Look for the green "Organic" seal on our product pages.</p>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+  <Footer />
+</Layout>
+
+<style>
+  .page-header {
+    background: #f4f4f4;
+    padding: 60px 0;
+    margin-bottom: 40px;
+  }
+  .section-padding {
+    padding: 40px 0 80px;
+  }
+  .faq-category {
+    margin-bottom: 50px;
+  }
+  .faq-category h3 {
+    color: #264653;
+    font-weight: 700;
+    border-bottom: 2px solid #e9c46a;
+    padding-bottom: 10px;
+    margin-bottom: 25px;
+  }
+  .faq-item {
+    background: #fff;
+    border: 1px solid #eee;
+    padding: 20px;
+    border-radius: 8px;
+    margin-bottom: 15px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.02);
+  }
+  .faq-item h4 {
+    color: #2a9d8f;
+    font-size: 1.1rem;
+    font-weight: 600;
+    margin-bottom: 10px;
+  }
+  .faq-item p {
+    margin: 0;
+    color: #555;
+    line-height: 1.6;
+  }
+  .faq-item a {
+    color: #e9c46a;
+    text-decoration: underline;
+  }
+</style>

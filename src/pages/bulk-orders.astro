@@ -1,0 +1,212 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+---
+
+<Layout title="Bulk Orders - AgroPro">
+  <Header />
+  <div class="page-header">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12">
+          <div class="titlepage text_align_center">
+            <h2>Bulk & Wholesale Orders</h2>
+            <p>Get the best rates for your farm or retail store</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="section-padding">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-6">
+          <div class="bulk-info">
+            <h3>Why Buy in Bulk?</h3>
+            <p>AgroPro offers competitive wholesale pricing for commercial farms, stables, and retail partners. Purchasing by the pallet or truckload significantly reduces your cost per pound.</p>
+
+            <ul class="benefits-list">
+              <li>
+                <strong>Volume Discounts:</strong> Save up to 20% on pallet quantities (40 bags).
+              </li>
+              <li>
+                <strong>Custom Formulations:</strong> We can mill custom feed rations for orders over 2 tons.
+              </li>
+              <li>
+                <strong>Scheduled Delivery:</strong> Set up recurring deliveries so you never run out of feed.
+              </li>
+              <li>
+                <strong>Dedicated Support:</strong> Access to our animal nutritionists for herd health consulting.
+              </li>
+            </ul>
+
+            <div class="pallet-info">
+              <h4>Standard Pallet Specs</h4>
+              <ul>
+                <li>40 Bags per Pallet (50lb bags)</li>
+                <li>Total Weight: 2,000 lbs (1 Ton)</li>
+                <li>Wrapped and capped for weather protection</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="contact-form-wrapper">
+            <h3>Request a Quote</h3>
+            <form class="main_form" id="bulkForm">
+              <div class="row">
+                <div class="col-md-12">
+                  <input class="contactus" placeholder="Farm / Business Name" type="text" name="BusinessName" required>
+                </div>
+                <div class="col-md-6">
+                  <input class="contactus" placeholder="Contact Name" type="text" name="Name" required>
+                </div>
+                <div class="col-md-6">
+                  <input class="contactus" placeholder="Phone Number" type="tel" name="Phone" required>
+                </div>
+                <div class="col-md-12">
+                  <input class="contactus" placeholder="Email Address" type="email" name="Email" required>
+                </div>
+                <div class="col-md-12">
+                  <select class="contactus" name="FeedType">
+                    <option value="" disabled selected>Primary Feed Interest</option>
+                    <option value="Poultry">Poultry Feed</option>
+                    <option value="Cattle">Cattle / Dairy Feed</option>
+                    <option value="Pig">Pig Feed</option>
+                    <option value="Mixed">Mixed Order</option>
+                  </select>
+                </div>
+                <div class="col-md-12">
+                  <input class="contactus" placeholder="Estimated Monthly Volume (lbs/tons)" type="text" name="Volume">
+                </div>
+                <div class="col-md-12">
+                  <textarea class="textarea" placeholder="Additional Details or Specific Requirements" name="Message"></textarea>
+                </div>
+                <div class="col-md-12">
+                  <div class="checkbox-wrapper">
+                    <input type="checkbox" id="terms-bulk" name="terms" required>
+                    <label for="terms-bulk">I agree to the <a href="/terms-conditions" target="_blank">Terms & Conditions</a> and <a href="/privacy-policy" target="_blank">Privacy Policy</a>.</label>
+                  </div>
+                </div>
+                <div class="col-md-12">
+                  <button class="send_btn">Get Quote</button>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <Footer />
+</Layout>
+
+<style>
+  .page-header {
+    background: #264653;
+    padding: 80px 0;
+    color: #fff;
+  }
+  .page-header h2 {
+    color: #fff;
+    font-size: 2.5rem;
+    font-weight: 700;
+  }
+  .page-header p {
+    color: #e9c46a;
+    font-size: 1.2rem;
+    margin-top: 10px;
+  }
+  .section-padding {
+    padding: 80px 0;
+  }
+  .bulk-info h3 {
+    color: #264653;
+    font-weight: 700;
+    margin-bottom: 20px;
+  }
+  .benefits-list {
+    margin: 30px 0;
+    padding-left: 0;
+    list-style: none;
+  }
+  .benefits-list li {
+    margin-bottom: 20px;
+    position: relative;
+    padding-left: 30px;
+  }
+  .benefits-list li::before {
+    content: "✓";
+    position: absolute;
+    left: 0;
+    color: #e9c46a;
+    font-weight: bold;
+  }
+  .pallet-info {
+    background: #f8f9fa;
+    padding: 20px;
+    border-radius: 8px;
+    border-left: 4px solid #2a9d8f;
+  }
+  .pallet-info h4 {
+    font-size: 1.1rem;
+    font-weight: 600;
+    margin-bottom: 10px;
+  }
+  .pallet-info ul {
+    padding-left: 20px;
+    margin-bottom: 0;
+  }
+  .contact-form-wrapper {
+    background: #fff;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 0 20px rgba(0,0,0,0.1);
+  }
+  .contactus {
+    margin-bottom: 20px;
+    width: 100%;
+    height: 50px;
+    border: 1px solid #ddd;
+    padding: 0 15px;
+    border-radius: 5px;
+  }
+  .textarea {
+    margin-bottom: 20px;
+    width: 100%;
+    border: 1px solid #ddd;
+    padding: 15px;
+    border-radius: 5px;
+    min-height: 120px;
+  }
+  .send_btn {
+    background: transparent;
+    color: #2a9d8f;
+    font-weight: 600;
+    padding: 12px 30px;
+    border: 1px solid #2a9d8f;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    width: 100%;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+  }
+  .send_btn:hover {
+    background: #2a9d8f;
+    color: #fff;
+  }
+  .checkbox-wrapper {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 20px;
+    font-size: 0.9rem;
+  }
+  .checkbox-wrapper a {
+    color: #2a9d8f;
+    text-decoration: underline;
+  }
+</style>

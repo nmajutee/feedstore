@@ -1,0 +1,241 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+---
+
+<Layout title="Quality & Safety - AgroPro">
+  <Header />
+  <div class="page-header">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12">
+          <div class="titlepage text_align_center">
+            <h2>Quality Assurance & Safety</h2>
+            <p>Our commitment to safe, nutritious feed for your animals</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="section-padding">
+    <div class="container">
+
+      <div class="row">
+        <div class="col-md-6">
+          <div class="quality-text">
+            <h3>The AgroPro Standard</h3>
+            <p>We understand that the health of your livestock is your livelihood. That's why we adhere to the strictest manufacturing and safety standards in the industry. From raw ingredient sourcing to the final bag, every step is monitored.</p>
+
+            <ul class="check-list">
+              <li><strong>Ingredient Testing:</strong> Every load of grain is tested for mycotoxins and moisture content before entering our mill.</li>
+              <li><strong>Precision Milling:</strong> Computer-controlled batching ensures exact nutrient levels in every pellet.</li>
+              <li><strong>Biosecurity:</strong> Our facilities follow strict biosecurity protocols to prevent contamination.</li>
+              <li><strong>Traceability:</strong> We track every lot number, allowing us to trace ingredients back to their source.</li>
+            </ul>
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="cert-box">
+            <h4>Our Certifications</h4>
+            <div class="cert-grid">
+              <div class="cert-item">
+                <span class="cert-icon">✓</span>
+                <span>HACCP Certified</span>
+              </div>
+              <div class="cert-item">
+                <span class="cert-icon">✓</span>
+                <span>Safe Feed / Safe Food</span>
+              </div>
+              <div class="cert-item">
+                <span class="cert-icon">✓</span>
+                <span>FDA Compliant</span>
+              </div>
+              <div class="cert-item">
+                <span class="cert-icon">✓</span>
+                <span>Non-GMO Verified (Select Lines)</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="row mt-5">
+        <div class="col-md-12">
+          <div class="process-section">
+            <h3>Our Milling Process</h3>
+            <div class="process-steps">
+              <div class="step">
+                <div class="step-num">1</div>
+                <h4>Sourcing</h4>
+                <p>We partner with local farmers for the highest quality grains.</p>
+              </div>
+              <div class="step">
+                <div class="step-num">2</div>
+                <h4>Grinding</h4>
+                <p>Grains are ground to optimal particle size for digestion.</p>
+              </div>
+              <div class="step">
+                <div class="step-num">3</div>
+                <h4>Mixing</h4>
+                <p>Micro-ingredients (vitamins/minerals) are added with precision.</p>
+              </div>
+              <div class="step">
+                <div class="step-num">4</div>
+                <h4>Pelleting</h4>
+                <p>Steam conditioning and pelleting improve feed conversion.</p>
+              </div>
+              <div class="step">
+                <div class="step-num">5</div>
+                <h4>Cooling & Packing</h4>
+                <p>Feeds are cooled to prevent mold and packed for freshness.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="row mt-5">
+        <div class="col-md-12">
+          <div class="sds-section">
+            <h3>Safety Data Sheets (SDS)</h3>
+            <p>Access safety information for our medicated and specialty products.</p>
+            <div class="sds-links">
+              <a href="#" class="sds-link"><i class="fa fa-file-pdf-o"></i> Medicated Chick Starter SDS</a>
+              <a href="#" class="sds-link"><i class="fa fa-file-pdf-o"></i> Fly Control Mineral SDS</a>
+              <a href="#" class="sds-link"><i class="fa fa-file-pdf-o"></i> Dairy Sanitizer SDS</a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+  <Footer />
+</Layout>
+
+<style>
+  .page-header {
+    background: #264653;
+    padding: 80px 0;
+    color: #fff;
+  }
+  .page-header h2 {
+    color: #fff;
+  }
+  .page-header p {
+    color: #e9c46a;
+  }
+  .section-padding {
+    padding: 80px 0;
+  }
+  .quality-text h3 {
+    color: #264653;
+    font-weight: 700;
+    margin-bottom: 20px;
+  }
+  .check-list {
+    list-style: none;
+    padding: 0;
+    margin-top: 20px;
+  }
+  .check-list li {
+    margin-bottom: 15px;
+    font-size: 1.05rem;
+  }
+  .cert-box {
+    background: #f8f9fa;
+    padding: 30px;
+    border-radius: 10px;
+    border: 1px solid #eee;
+  }
+  .cert-box h4 {
+    text-align: center;
+    margin-bottom: 20px;
+    font-weight: 700;
+  }
+  .cert-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 15px;
+  }
+  .cert-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    background: #fff;
+    padding: 10px;
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+  }
+  .cert-icon {
+    color: #2a9d8f;
+    font-weight: bold;
+    font-size: 1.2rem;
+  }
+  .process-section {
+    text-align: center;
+    margin-top: 40px;
+  }
+  .process-section h3 {
+    margin-bottom: 40px;
+    font-weight: 700;
+  }
+  .process-steps {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 20px;
+  }
+  .step {
+    flex: 1;
+    min-width: 150px;
+    position: relative;
+  }
+  .step-num {
+    width: 50px;
+    height: 50px;
+    background: #e9c46a;
+    color: #264653;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 800;
+    font-size: 1.5rem;
+    margin: 0 auto 15px;
+  }
+  .step h4 {
+    font-weight: 600;
+    margin-bottom: 10px;
+  }
+  .step p {
+    font-size: 0.9rem;
+    color: #666;
+  }
+  .sds-section {
+    background: #fff;
+    border: 1px solid #ddd;
+    padding: 30px;
+    border-radius: 8px;
+  }
+  .sds-links {
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap;
+    margin-top: 20px;
+  }
+  .sds-link {
+    background: #f4f4f4;
+    padding: 10px 20px;
+    border-radius: 5px;
+    color: #264653;
+    text-decoration: none;
+    font-weight: 600;
+    transition: background 0.2s;
+  }
+  .sds-link:hover {
+    background: #e9c46a;
+  }
+</style>

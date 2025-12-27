@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" fill="currentColor" role="img" aria-label="Cow icon">
+  <path d="M12 24c0-8 6-14 14-14h12c8 0 14 6 14 14v16c0 8-6 14-14 14H26c-8 0-14-6-14-14V24z" stroke="currentColor" stroke-width="2" fill="none"/>
+  <path d="M12 24l-8-8v8M52 24l8-8v8" stroke="currentColor" stroke-width="2" fill="none"/>
+  <circle cx="24" cy="32" r="2" fill="currentColor"/>
+  <circle cx="40" cy="32" r="2" fill="currentColor"/>
+  <path d="M28 44h8" stroke="currentColor" stroke-width="2"/>
+</svg>

@@ -1,0 +1,230 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+---
+
+<Layout title="Feeding Guide - AgroPro">
+  <Header />
+  <div class="page-header">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12">
+          <div class="titlepage text_align_center">
+            <h2>Feeding Guides & Ration Calculators</h2>
+            <p>Optimize your herd's health with our expert feeding recommendations</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="section-padding">
+    <div class="container">
+
+      <!-- Poultry Section -->
+      <div class="guide-section">
+        <div class="row align-items-center">
+          <div class="col-md-12">
+            <h3><i class="fa fa-leaf" style="color: #4f772d;"></i> Poultry Feeding Chart</h3>
+            <p>Chickens require different protein levels depending on their age and purpose (meat vs. eggs). Use this chart as a general guideline.</p>
+            <div class="table-responsive">
+              <table class="table table-bordered table-hover">
+                <thead class="thead-dark">
+                  <tr>
+                    <th>Life Stage</th>
+                    <th>Age Range</th>
+                    <th>Recommended Feed</th>
+                    <th>Protein %</th>
+                    <th>Daily Intake (approx)</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>Chick Starter</td>
+                    <td>0 - 8 Weeks</td>
+                    <td>Chick Starter Crumbles</td>
+                    <td>18% - 20%</td>
+                    <td>Free Choice</td>
+                  </tr>
+                  <tr>
+                    <td>Pullet Grower</td>
+                    <td>9 - 18 Weeks</td>
+                    <td>Grower Pellets</td>
+                    <td>16% - 18%</td>
+                    <td>0.15 - 0.20 lbs</td>
+                  </tr>
+                  <tr>
+                    <td>Layer (Production)</td>
+                    <td>19+ Weeks</td>
+                    <td>Layer Mash/Pellets</td>
+                    <td>16%</td>
+                    <td>0.25 - 0.30 lbs</td>
+                  </tr>
+                  <tr>
+                    <td>Broiler (Meat)</td>
+                    <td>0 - 3 Weeks</td>
+                    <td>Broiler Starter</td>
+                    <td>22% - 24%</td>
+                    <td>Free Choice</td>
+                  </tr>
+                  <tr>
+                    <td>Broiler (Finish)</td>
+                    <td>4+ Weeks</td>
+                    <td>Broiler Finisher</td>
+                    <td>18% - 20%</td>
+                    <td>Free Choice</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <hr class="divider">
+
+      <!-- Cattle Section -->
+      <div class="guide-section">
+        <div class="row">
+          <div class="col-md-12">
+            <h3><i class="fa fa-leaf" style="color: #4f772d;"></i> Cattle & Dairy Feeding</h3>
+            <p>Cattle feeding relies heavily on forage quality. Grain should supplement, not replace, high-quality hay or pasture.</p>
+
+            <div class="tips-box">
+              <h4>General Rule of Thumb</h4>
+              <p>Cattle should consume <strong>2% to 3% of their body weight</strong> in dry matter daily. For a 1,000 lb cow, that is 20-30 lbs of total feed (forage + grain).</p>
+            </div>
+
+            <div class="table-responsive mt-4">
+              <table class="table table-bordered">
+                <thead class="thead-dark">
+                  <tr>
+                    <th>Type</th>
+                    <th>Goal</th>
+                    <th>Grain Supplement Rate</th>
+                    <th>Notes</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>Calves</td>
+                    <td>Growth</td>
+                    <td>1-2% of Body Weight</td>
+                    <td>Introduce creep feed slowly.</td>
+                  </tr>
+                  <tr>
+                    <td>Lactating Cows</td>
+                    <td>Milk Production</td>
+                    <td>1 lb grain per 2.5-3 lbs milk</td>
+                    <td>High energy requirement.</td>
+                  </tr>
+                  <tr>
+                    <td>Beef Cattle</td>
+                    <td>Maintenance</td>
+                    <td>0.5% of Body Weight</td>
+                    <td>Only if forage quality is poor.</td>
+                  </tr>
+                  <tr>
+                    <td>Beef Cattle</td>
+                    <td>Finishing</td>
+                    <td>2-2.5% of Body Weight</td>
+                    <td>High energy ration for marbling.</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <hr class="divider">
+
+      <!-- Pig Section -->
+      <div class="guide-section">
+        <div class="row">
+          <div class="col-md-12">
+            <h3><i class="fa fa-leaf" style="color: #4f772d;"></i> Swine Feeding Stages</h3>
+            <p>Pigs are monogastric and require high-energy, low-fiber diets. Precision feeding reduces waste and cost.</p>
+            <ul class="feed-list">
+              <li><strong>Nursery (15-50 lbs):</strong> High protein (18-21%), highly digestible ingredients.</li>
+              <li><strong>Grower (50-120 lbs):</strong> Moderate protein (16%), focus on lean growth.</li>
+              <li><strong>Finisher (120-280 lbs):</strong> Lower protein (13-14%), high energy for finish.</li>
+              <li><strong>Gestating Sows:</strong> Limit feed to prevent obesity (4-6 lbs/day).</li>
+              <li><strong>Lactating Sows:</strong> Free choice (often 12-15+ lbs/day) to support milk.</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <div class="disclaimer-box">
+        <p><strong>Note:</strong> These are general guidelines. Individual animal needs vary based on breed, environment, and health status. Always provide access to clean, fresh water.</p>
+      </div>
+
+    </div>
+  </div>
+  <Footer />
+</Layout>
+
+<style>
+  .page-header {
+    background: #f4f4f4;
+    padding: 60px 0;
+    margin-bottom: 40px;
+  }
+  .section-padding {
+    padding: 40px 0 80px;
+  }
+  .guide-section {
+    margin-bottom: 50px;
+  }
+  .guide-section h3 {
+    color: #264653;
+    font-weight: 700;
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .table thead th {
+    background-color: #264653;
+    color: #fff;
+    border-color: #264653;
+  }
+  .tips-box {
+    background: #e9c46a;
+    padding: 20px;
+    border-radius: 8px;
+    color: #264653;
+  }
+  .tips-box h4 {
+    font-weight: 700;
+    margin-bottom: 10px;
+  }
+  .tips-box p {
+    margin: 0;
+  }
+  .divider {
+    margin: 50px 0;
+    border-top: 1px solid #ddd;
+  }
+  .feed-list {
+    list-style: none;
+    padding: 0;
+  }
+  .feed-list li {
+    background: #f8f9fa;
+    margin-bottom: 10px;
+    padding: 15px;
+    border-left: 4px solid #2a9d8f;
+  }
+  .disclaimer-box {
+    margin-top: 40px;
+    padding: 20px;
+    border: 1px solid #ddd;
+    background: #fff;
+    border-radius: 5px;
+    font-style: italic;
+    color: #666;
+  }
+</style>

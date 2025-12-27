@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" fill="currentColor" role="img" aria-label="Fish icon">
+  <path d="M56 32c0-10-10-18-24-18S8 22 8 32s10 18 24 18 24-8 24-18z" stroke="currentColor" stroke-width="2" fill="none"/>
+  <path d="M56 32l8-8v16l-8-8z" stroke="currentColor" stroke-width="2" fill="currentColor"/>
+  <circle cx="20" cy="28" r="2" fill="currentColor"/>
+  <path d="M36 24c4 4 4 12 0 16" stroke="currentColor" stroke-width="2" fill="none"/>
+</svg>

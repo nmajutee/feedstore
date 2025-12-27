@@ -1,0 +1,90 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Header from '../../components/Header.astro';
+import Footer from '../../components/Footer.astro';
+import ProductCard from '../../components/ProductCard.astro';
+import SidebarFilter from '../../components/SidebarFilter.astro';
+import { categories, products } from '../../data/products';
+import { Icon } from 'astro-icon/components';
+
+const { searchParams } = Astro.url;
+const query = searchParams.get('search')?.toLowerCase();
+
+let filteredProducts = products;
+
+if (query) {
+  filteredProducts = products.filter(prod =>
+    prod.name.toLowerCase().includes(query) ||
+    prod.description.toLowerCase().includes(query) ||
+    prod.animal.toLowerCase().includes(query)
+  );
+}
+
+// Extract unique filter values from ALL products or filtered results
+const animals = [...new Set(filteredProducts.map(p => p.animal))].filter(Boolean);
+const weights = [...new Set(filteredProducts.map(p => p.weight))].filter(Boolean);
+const prices = filteredProducts.map(p => p.price);
+const minPrice = prices.length ? Math.min(...prices) : 0;
+const maxPrice = prices.length ? Math.max(...prices) : 0;
+---
+
+<Layout title="All Feeds - AgroPro">
+   <Header />
+
+   <div class="page-header">
+      <div class="container">
+         <div class="row">
+            <div class="col-md-12">
+               <div class="titlepage text_align_left">
+                  <span>{query ? 'Search Results' : 'Our Feeds'}</span>
+                  <h2>{query ? `Results for "${query}"` : 'BROWSE ALL PRODUCTS'}</h2>
+               </div>
+            </div>
+         </div>
+      </div>
+   </div>
+
+   <div class="section-padding">
+      <div class="container">
+         <div class="row">
+            <!-- Sidebar -->
+            <div class="col-lg-3 mb-4">
+               <SidebarFilter
+                  animals={animals}
+                  weights={weights}
+                  minPrice={minPrice}
+                  maxPrice={maxPrice}
+               />
+            </div>
+
+            <!-- Product Grid -->
+            <div class="col-lg-9">
+               {query && filteredProducts.length === 0 ? (
+                  <div class="col-12">
+                     <div class="alert alert-warning">
+                        No products found matching your search. <a href="/products">View all products</a>.
+                     </div>
+                  </div>
+               ) : (
+                  <div class="row g-3 g-md-4">
+                     {filteredProducts.map((product) => (
+                        <div class="col-12 col-sm-6 col-lg-4">
+                           <ProductCard product={product} />
+                        </div>
+                     ))}
+                  </div>
+               )}
+            </div>
+         </div>
+      </div>
+   </div>
+
+   <Footer />
+</Layout>
+
+<style>
+   .page-header {
+      background: #f8f9fa;
+      padding: 60px 0 30px;
+   }
+</style>

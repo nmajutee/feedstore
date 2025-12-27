@@ -1,0 +1,147 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Header from '../../components/Header.astro';
+import Footer from '../../components/Footer.astro';
+import { blogPosts } from '../../data/blog';
+
+// Sort posts by date (newest first) - assuming date string is parseable
+const sortedPosts = [...blogPosts].sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
+---
+
+<Layout title="Insights & Blog - AgroPro">
+  <Header />
+  <div class="page-header">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12">
+          <div class="titlepage text_align_center">
+            <h2>Insights & News</h2>
+            <p>Expert advice on animal nutrition and farm management</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="section-padding">
+    <div class="container">
+      <div class="row">
+        {sortedPosts.map(post => (
+          <div class="col-md-4 col-sm-6">
+            <div class="blog-card">
+              <div class="blog-img">
+                <img src={post.image} alt={post.title} />
+                <span class="category-tag">{post.category}</span>
+              </div>
+              <div class="blog-content">
+                <div class="meta">
+                  <span><i class="fa fa-calendar"></i> {post.date}</span>
+                  <span><i class="fa fa-user"></i> {post.author}</span>
+                </div>
+                <h3><a href={`/blog/${post.slug}`}>{post.title}</a></h3>
+                <p>{post.excerpt}</p>
+                <a href={`/blog/${post.slug}`} class="read-more">Read More <i class="fa fa-arrow-right"></i></a>
+              </div>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </div>
+  <Footer />
+</Layout>
+
+<style>
+  .page-header {
+    background: #f4f4f4;
+    padding: 60px 0;
+    margin-bottom: 40px;
+  }
+  .section-padding {
+    padding: 40px 0 80px;
+  }
+  .blog-card {
+    background: #fff;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+    margin-bottom: 30px;
+    transition: transform 0.3s ease;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+  }
+  .blog-card:hover {
+    transform: translateY(-5px);
+  }
+  .blog-img {
+    position: relative;
+    height: 200px;
+    overflow: hidden;
+    background: #eee;
+  }
+  .blog-img img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  .category-tag {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    background: #e9c46a;
+    color: #264653;
+    padding: 5px 10px;
+    border-radius: 4px;
+    font-size: 0.8rem;
+    font-weight: 600;
+  }
+  .blog-content {
+    padding: 20px;
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+  }
+  .meta {
+    display: flex;
+    gap: 15px;
+    font-size: 0.8rem;
+    color: #888;
+    margin-bottom: 10px;
+  }
+  .meta i {
+    color: #e9c46a;
+    margin-right: 5px;
+  }
+  .blog-content h3 {
+    font-size: 1.2rem;
+    margin-bottom: 10px;
+    line-height: 1.4;
+  }
+  .blog-content h3 a {
+    color: #264653;
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+  .blog-content h3 a:hover {
+    color: #e9c46a;
+  }
+  .blog-content p {
+    color: #666;
+    font-size: 0.9rem;
+    margin-bottom: 20px;
+    flex-grow: 1;
+  }
+  .read-more {
+    color: #2a9d8f;
+    font-weight: 600;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    transition: gap 0.2s;
+  }
+  .read-more:hover {
+    gap: 8px;
+  }
+</style>
