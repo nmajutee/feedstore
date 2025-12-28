@@ -9,9 +9,9 @@ $(function () {
   /* Preloader
   -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- */
 
-  setTimeout(function () {
+  /* setTimeout(function () {
     $('.loader_bg').fadeToggle();
-  }, 1500);
+  }, 1500); */
 
   /* Tooltip
   -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- */
@@ -46,7 +46,7 @@ $(function () {
     });
   });
 
-  /* Product slider 
+  /* Product slider
   -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- */
   // optional
   $('#blogCarousel').carousel({

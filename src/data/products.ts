@@ -35,6 +35,7 @@ export interface Category {
   name: string;
   title: string;
   icon: string;
+  image?: string;
   description: string;
   subCategories: SubCategory[];
   products: Product[];
@@ -47,6 +48,7 @@ export const categories: Category[] = [
     name: 'Poultry Feed',
     title: 'Poultry Feed',
     icon: 'ph:bird',
+    image: '/images/categories/poultry/thumb.jpg',
     description: 'High quality feed for chickens, ducks, and other poultry.',
     subCategories: [
       { slug: 'general-poultry', name: 'General Poultry' },
@@ -69,6 +71,7 @@ export const categories: Category[] = [
     name: 'Livestock Feed',
     title: 'Livestock Feed',
     icon: 'ph:cow',
+    image: '/images/categories/livestock/thumb.jpg',
     description: 'Nutritious feed for cattle, sheep, goats, and pigs.',
     subCategories: [
       { slug: 'cattle-feed', name: 'Cattle Feed' },
@@ -90,6 +93,7 @@ export const categories: Category[] = [
     name: 'Pig Feed',
     title: 'Pig Feed',
     icon: 'mdi:pig',
+    image: '/images/categories/pig/thumb.jpg',
     description: 'Complete nutrition for pigs at all stages.',
     subCategories: [
       { slug: 'pig-grower', name: 'Pig Grower' },
@@ -111,6 +115,7 @@ export const categories: Category[] = [
     name: 'Organic Feed',
     title: 'Organic Feed',
     icon: 'ph:plant',
+    image: '/images/categories/organic/thumb.jpg',
     description: 'Certified organic and non-GMO feed options.',
     subCategories: [
       { slug: 'organic-poultry', name: 'Organic Poultry' },
@@ -132,6 +137,7 @@ export const categories: Category[] = [
     name: 'Specialty Feed',
     title: 'Specialty Feed',
     icon: 'mdi:rabbit',
+    image: '/images/categories/specialty/thumb.jpg',
     description: 'Feed for rabbits, game birds, and pets.',
     subCategories: [
       { slug: 'rabbit-feed', name: 'Rabbit Feed' },

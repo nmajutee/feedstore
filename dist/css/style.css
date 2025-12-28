@@ -1,7 +1,7 @@
 /* Modern Livestock Feed Design */
 :root {
-    --primary-color: #1a4d2e; /* Deep Forest Green */
-    --secondary-color: #4f772d; /* Leaf Green */
+    --primary-color: #264653; /* Dark Blue-Grey (Footer Color) */
+    --secondary-color: #2a9d8f; /* Teal Green */
     --accent-color: #e9c46a; /* Wheat/Gold */
     --text-dark: #264653; /* Dark Blue-Grey */
     --text-light: #f1faee; /* Off-white */
@@ -47,36 +47,38 @@ a:hover {
 }
 
 .btn-custom {
-    background-color: var(--accent-color);
-    color: var(--text-dark);
+    background-color: transparent;
+    color: var(--secondary-color);
     padding: 12px 30px;
     border-radius: 5px;
     font-weight: 600;
     text-transform: uppercase;
     letter-spacing: 1px;
-    border: 2px solid var(--accent-color);
+    border: 1px solid var(--secondary-color);
     display: inline-block;
+    transition: all 0.3s ease;
 }
 
 .btn-custom:hover {
-    background-color: transparent;
-    color: var(--accent-color);
+    background-color: var(--secondary-color);
+    color: #fff;
 }
 
 .btn-outline {
     background-color: transparent;
-    color: var(--bg-white);
+    color: #fff;
     padding: 12px 30px;
     border-radius: 5px;
     font-weight: 600;
     text-transform: uppercase;
     letter-spacing: 1px;
-    border: 2px solid var(--bg-white);
+    border: 1px solid #fff;
     display: inline-block;
+    transition: all 0.3s ease;
 }
 
 .btn-outline:hover {
-    background-color: var(--bg-white);
+    background-color: #fff;
     color: var(--primary-color);
 }
 
@@ -250,7 +252,7 @@ footer {
 }
 
 .copyright {
-    background: #11331f;
+    background: #1d353f;
     padding: 20px 0;
     margin-top: 60px;
     text-align: center;
@@ -293,19 +295,21 @@ footer {
 }
 
 .send_btn {
-    background: var(--primary-color);
-    color: #fff;
-    padding: 15px 40px;
-    border: none;
+    background: transparent;
+    color: var(--secondary-color);
+    padding: 12px 30px;
+    border: 1px solid var(--secondary-color);
     border-radius: 5px;
     cursor: pointer;
     font-weight: 600;
     text-transform: uppercase;
-    transition: background 0.3s;
+    transition: all 0.3s ease;
+    letter-spacing: 1px;
 }
 
 .send_btn:hover {
     background: var(--secondary-color);
+    color: #fff;
 }
 
 /* Responsive */

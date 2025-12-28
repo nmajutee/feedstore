@@ -1,5 +1,5 @@
-/*--------------------------------------------------------------------- 
-File Name: responsive.css 
+/*---------------------------------------------------------------------
+File Name: responsive.css
 ---------------------------------------------------------------------*/
 
 /* ===== PRODUCT GRID RESPONSIVE STYLES ===== */
@@ -26,20 +26,20 @@ File Name: responsive.css
 }
 
 @media (min-width: 1343px) and (max-width: 1500px) {
-  
+
 }
 
 @media (min-width: 1200px) and (max-width: 1342px) {
-   
-  
+
+
 }
 
 @media (min-width: 992px) and (max-width: 1199px) {
-   
+
     .site-navbar ul li {
         padding-right: 37px;
     }
-   
+
    ul.recent li {font-size: 13px;}
    .titlepage h2 {
     font-size: 39px;
@@ -52,7 +52,7 @@ File Name: responsive.css
 }
 
 @media (min-width: 768px) and (max-width: 991px) {
-   
+
     .site-navbar ul li {
         padding-right: 7px;
     }
@@ -64,7 +64,7 @@ File Name: responsive.css
         font-size: 56px;
         line-height: 70px;
     }
-   
+
    .about .titlepage {padding-bottom: 30px; max-width: inherit;}
     .titlepage h2 {
     font-size: 37px;
@@ -98,8 +98,8 @@ File Name: responsive.css
 }
 
 @media (min-width: 576px) and (max-width: 767px) {
-  
-    
+
+
    .willom h1 {
     font-size: 49px;
     line-height: 60px;}
@@ -112,12 +112,12 @@ File Name: responsive.css
    .titlepage h2 {
     font-size: 46px;
     line-height: 50px;}
-   
+
    .about_img {
     margin-top: 30px;
 }
        .about .titlepage { max-width: inherit;}
-  
+
     .d_none {
         display: none !important;
     }
@@ -204,7 +204,7 @@ File Name: responsive.css
 }
 
 @media (max-width: 575px) {
-   
+
     .logo {
         text-align: left;
     }
@@ -222,9 +222,10 @@ line-height: 40px;padding: 46px 21px;
         font-size: 37px;
         line-height: 45px;
     }
-    .about_img {
-    margin-top: 30px;
-}
+    .about-img, .about_img {
+        margin-top: 30px;
+        margin-bottom: 30px;
+    }
        .about .titlepage { max-width: inherit;}
        .custom {padding: 40px 12px;}
        .services_box {
@@ -236,7 +237,7 @@ line-height: 40px;padding: 46px 21px;
     .latest {
         max-width: 317px;
         margin: 0 auto;
-       
+
         margin-top: 30px;
     }
     .titlepage h2 {
@@ -252,46 +253,7 @@ line-height: 40px;padding: 46px 21px;
     margin-top: 20px;
 }
     /* navbar css for mobile start */
-    .navbar-area {
-        margin-top: -67px;
-    }
-    .nav-toggler {
-        display: block;
-        position: absolute;
-        right: 15px;
-        z-index: 99999;
-    }
-    .site-navbar {
-        min-height: 60px;
-    }
-    .site-navbar ul {
-        position: absolute;
-        width: 100%;
-        left: 0px;
-        top: 0px;
-        flex-direction: column;
-        align-items: center;
-        background-color: #fff;
-        max-height: 0;
-        overflow: hidden;
-        transition: .3s;
-        z-index: 99999;
-        box-shadow: 0 0 10px rgb(192, 190, 182);
-    }
-    .site-navbar ul li {
-        width: 100%;
-        text-align: left;
-        padding-right: 0;
-    }
-       .site-navbar ul li a {
-    padding: 0px 25px 0px 25px;
-    line-height: 40px;
-}
-    .site-navbar ul.open {
-        max-height: 100vh;
-        padding-bottom: 25px;
-        overflow: visible;
-    }
+    /* Legacy mobile menu styles removed to prevent conflicts with Header.astro drawer */
 
     /* ===== MOBILE PRODUCT GRID FIXES ===== */
     .section-padding {
@@ -365,5 +327,35 @@ line-height: 40px;padding: 46px 21px;
     #best-sellers .row.g-4 > div {
         flex: 0 0 100%;
         max-width: 100%;
+    }
+
+    /* Hero Section Mobile Fixes */
+    .hero-section {
+        height: auto !important;
+        min-height: 100vh;
+        padding-top: 140px; /* Clear fixed header */
+        padding-bottom: 60px;
+        background-attachment: scroll; /* Better mobile performance */
+    }
+
+    .hero-content {
+        padding: 0 15px;
+    }
+
+    .hero-content h1 {
+        font-size: 2.5rem;
+        line-height: 1.2;
+        margin-bottom: 15px;
+    }
+
+    .hero-content p {
+        font-size: 1.1rem;
+        margin-bottom: 30px;
+    }
+
+    .home-hero__stats {
+        flex-direction: column;
+        gap: 20px;
+        margin-top: 40px;
     }
 }
