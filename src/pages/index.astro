@@ -123,15 +123,9 @@ const faqs = [
                         {categories.map((category) => (
                             <div class="home-cats__slide">
                                 <a class="category-card home-cats__card" href={`/${category.slug}`} aria-label={`Explore ${category.title}`}>
-                                    {category.image ? (
-                                        <div class="home-cats__image">
-                                            <img src={category.image} alt={category.title} loading="lazy" />
-                                        </div>
-                                    ) : (
-                                        <div class="home-cats__icon" aria-hidden="true">
-                                            <Icon name={category.icon} size={44} />
-                                        </div>
-                                    )}
+                                    <div class="home-cats__icon" aria-hidden="true">
+                                        <Icon name={category.icon} size={44} />
+                                    </div>
                                     <h3>{category.title}</h3>
                                     <p class="home-cats__desc">{category.description}</p>
                                     <span class="home-cats__cta">
@@ -547,25 +541,6 @@ const faqs = [
         .home-cats__card {
             display: block;
             height: 100%;
-        }
-
-        .home-cats__image {
-            width: 100%;
-            height: 180px;
-            border-radius: 10px;
-            overflow: hidden;
-            margin-bottom: 16px;
-        }
-
-        .home-cats__image img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            transition: transform 0.3s ease;
-        }
-
-        .home-cats__card:hover .home-cats__image img {
-            transform: scale(1.05);
         }
 
         .home-cats__icon {
