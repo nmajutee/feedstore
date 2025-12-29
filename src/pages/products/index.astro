@@ -26,9 +26,30 @@ const weights = [...new Set(filteredProducts.map(p => p.weight))].filter(Boolean
 const prices = filteredProducts.map(p => p.price);
 const minPrice = prices.length ? Math.min(...prices) : 0;
 const maxPrice = prices.length ? Math.max(...prices) : 0;
+
+const schema = {
+  "@context": "https://schema.org",
+  "@type": "CollectionPage",
+  "name": "All Products",
+  "description": "Browse our complete catalog of premium livestock feeds.",
+  "url": Astro.url.href,
+  "mainEntity": {
+    "@type": "ItemList",
+    "itemListElement": filteredProducts.map((product, index) => ({
+      "@type": "ListItem",
+      "position": index + 1,
+      "url": new URL(`/${product.topCategory}/${product.subCategory}/${product.slug}`, Astro.site).href,
+      "name": product.name
+    }))
+  }
+};
 ---
 
-<Layout title="All Feeds - AgroPro">
+<Layout
+  title="All Livestock Feeds - AgroPro Catalog"
+  description="Browse our complete selection of premium feeds for poultry, cattle, pigs, and specialty animals. Find the perfect nutrition for your farm."
+  schema={schema}
+>
    <Header />
 
    <div class="page-header">

@@ -6,9 +6,37 @@ import { blogPosts } from '../../data/blog';
 
 // Sort posts by date (newest first) - assuming date string is parseable
 const sortedPosts = [...blogPosts].sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
+
+// Get unique categories
+const categories = [...new Set(blogPosts.map(post => post.category))];
+
+const schema = {
+  "@context": "https://schema.org",
+  "@type": "Blog",
+  "name": "AgroPro Insights & News",
+  "description": "Expert advice on animal nutrition, farm management, and industry news.",
+  "url": "https://agropro-feed.com/blog",
+  "blogPost": sortedPosts.map(post => ({
+    "@type": "BlogPosting",
+    "headline": post.title,
+    "description": post.excerpt,
+    "image": `https://agropro-feed.com${post.image}`,
+    "datePublished": new Date(post.date).toISOString(),
+    "author": {
+      "@type": "Person",
+      "name": post.author
+    },
+    "url": `https://agropro-feed.com/blog/${post.slug}`
+  }))
+};
 ---
 
-<Layout title="Insights & Blog - AgroPro">
+<Layout
+  title="Insights & Blog - AgroPro Animal Nutrition"
+  description="Read the latest insights, tips, and news on animal nutrition, livestock management, and feed efficiency from the experts at AgroPro."
+  canonical="https://agropro-feed.com/blog"
+  schema={schema}
+>
   <Header />
   <div class="page-header">
     <div class="container">
@@ -25,13 +53,26 @@ const sortedPosts = [...blogPosts].sort((a, b) => new Date(b.date).getTime() - n
 
   <div class="section-padding">
     <div class="container">
+
+      <!-- Category Filter -->
+      <div class="row mb-5">
+        <div class="col-12 text-center">
+          <div class="category-filter">
+            <a href="/blog" class="active">All</a>
+            {categories.map(cat => (
+              <a href={`/blog/category/${cat.toLowerCase()}`}>{cat}</a>
+            ))}
+          </div>
+        </div>
+      </div>
+
       <div class="row">
         {sortedPosts.map(post => (
           <div class="col-md-4 col-sm-6">
             <div class="blog-card">
               <div class="blog-img">
                 <img src={post.image} alt={post.title} />
-                <span class="category-tag">{post.category}</span>
+                <a href={`/blog/category/${post.category.toLowerCase()}`} class="category-tag">{post.category}</a>
               </div>
               <div class="blog-content">
                 <div class="meta">
@@ -59,6 +100,25 @@ const sortedPosts = [...blogPosts].sort((a, b) => new Date(b.date).getTime() - n
   }
   .section-padding {
     padding: 40px 0 80px;
+  }
+  .category-filter {
+    margin-bottom: 30px;
+  }
+  .category-filter a {
+    display: inline-block;
+    padding: 8px 20px;
+    margin: 0 5px;
+    background: #fff;
+    border: 1px solid #ddd;
+    border-radius: 20px;
+    color: #333;
+    text-decoration: none;
+    transition: all 0.3s;
+  }
+  .category-filter a:hover, .category-filter a.active {
+    background: #e9c46a;
+    border-color: #e9c46a;
+    color: #264653;
   }
   .blog-card {
     background: #fff;

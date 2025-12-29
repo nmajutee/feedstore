@@ -1,0 +1,25 @@
+# AgroPro Feed Store
+
+AgroPro is a premium livestock feed provider based in Des Moines, Iowa. We specialize in high-quality nutrition for poultry, cattle, pigs, and other farm animals.
+
+## Core Pages
+
+- [Home](https://agropro-feed.com/)
+- [About Us](https://agropro-feed.com/about)
+- [Products](https://agropro-feed.com/products)
+- [Contact](https://agropro-feed.com/contact)
+- [Blog](https://agropro-feed.com/blog)
+
+## Product Categories
+
+- [Poultry Feed](https://agropro-feed.com/poultry-feed)
+- [Livestock Feed](https://agropro-feed.com/livestock-feed)
+- [Pig Feed](https://agropro-feed.com/pig-feed)
+- [Organic Feed](https://agropro-feed.com/organic-feed)
+- [Specialty Feed](https://agropro-feed.com/specialty-feed)
+
+## Contact Information
+
+- **Address:** 123 Corn Belt Way, Des Moines, IA 50309
+- **Phone:** +1 (555) 123-4567
+- **Email:** info@agropro-feed.com

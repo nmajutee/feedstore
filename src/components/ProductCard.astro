@@ -28,7 +28,13 @@ const categoryName = categoryData?.title || 'Unknown Category';
 
 <div class="product-card" data-animal={product.animal} data-price={product.price} data-weight={product.weight}>
   <div class="product-image">
-    <img src={product.image} alt={product.name} loading="lazy" />
+    {product.image ? (
+      <img src={product.image} alt={product.name} loading="lazy" />
+    ) : (
+      <div class="no-image-placeholder">
+        <Icon name={categoryIcon} class="placeholder-icon" />
+      </div>
+    )}
     <div class="overlay">
       <a href={`/${product.topCategory}/${product.subCategory}/${product.slug}`} class="view-btn">
         View Details
@@ -94,6 +100,23 @@ const categoryName = categoryData?.title || 'Unknown Category';
     height: 100%;
     object-fit: cover;
     transition: transform 0.5s ease;
+  }
+
+  .no-image-placeholder {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #e9ecef;
+  }
+
+  .placeholder-icon {
+    font-size: 4rem;
+    color: #adb5bd;
   }
 
   .product-card:hover .product-image img {

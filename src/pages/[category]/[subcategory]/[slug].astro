@@ -20,9 +20,35 @@ const { product } = Astro.props;
 // Find category and subcategory names for breadcrumbs
 const category = categories.find(c => c.slug === product.topCategory);
 const subCategory = category?.subCategories.find(s => s.slug === product.subCategory);
+
+const schema = {
+  "@context": "https://schema.org",
+  "@type": "Product",
+  "name": product.name,
+  "image": new URL(product.image, Astro.site).href,
+  "description": product.description,
+  "brand": {
+    "@type": "Brand",
+    "name": "AgroPro"
+  },
+  "offers": {
+    "@type": "Offer",
+    "url": Astro.url.href,
+    "priceCurrency": "USD",
+    "price": product.price,
+    "availability": "https://schema.org/InStock",
+    "itemCondition": "https://schema.org/NewCondition"
+  }
+};
 ---
 
-<Layout title={`${product.name} - AgroPro`}>
+<Layout
+  title={`${product.name} - ${category?.name} | AgroPro`}
+  description={product.details}
+  image={product.image}
+  type="product"
+  schema={schema}
+>
    <div class="full_bg">
       <Header />
    </div>
@@ -54,7 +80,15 @@ const subCategory = category?.subCategories.find(s => s.slug === product.subCate
          <div class="row">
             <div class="col-md-6">
                <div class="about_img">
-                  <figure><img src={product.image} alt={product.name} style="width: 100%; max-height: 400px; object-fit: contain;"/></figure>
+                  <figure>
+                    {product.image ? (
+                        <img src={product.image} alt={product.name} style="width: 100%; max-height: 400px; object-fit: contain;"/>
+                    ) : (
+                        <div style="width: 100%; height: 400px; background: #f8f9fa; display: flex; align-items: center; justify-content: center; color: #adb5bd; font-size: 1.5rem;">
+                            No Image Available
+                        </div>
+                    )}
+                  </figure>
                </div>
 
                <div style="margin-top: 30px; background: #f9f9f9; padding: 20px; border-radius: 5px;">

@@ -5,7 +5,32 @@ import Footer from '../components/Footer.astro';
 import { Icon } from 'astro-icon/components';
 ---
 
-<Layout title="About Us - AgroPro">
+<Layout
+  title="About AgroPro - Leading Livestock Feed Manufacturer | Iowa"
+  description="Learn about AgroPro's 40+ year history of providing premium livestock nutrition. Based in Iowa, we combine traditional farming values with modern nutritional science."
+  schema={{
+    "@context": "https://schema.org",
+    "@type": "AboutPage",
+    "mainEntity": {
+      "@type": "Organization",
+      "name": "AgroPro",
+      "foundingDate": "1985",
+      "founder": {
+        "@type": "Person",
+        "name": "Robert Sterling"
+      },
+      "location": {
+        "@type": "Place",
+        "address": {
+          "@type": "PostalAddress",
+          "addressLocality": "Des Moines",
+          "addressRegion": "IA",
+          "addressCountry": "US"
+        }
+      }
+    }
+  }}
+>
    <Header />
 
    <!-- Hero Section -->

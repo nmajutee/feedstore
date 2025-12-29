@@ -23,7 +23,7 @@ import { categories } from '../data/products';
                 <ul class="dropdown-menu">
                   {categories.map((category) => (
                     <li>
-                      <a href={`/products#${category.id}`}>
+                      <a href={`/${category.slug}`}>
                         <Icon name={category.icon} class="menu-icon" />
                         {category.title}
                       </a>
@@ -86,7 +86,7 @@ import { categories } from '../data/products';
             <li><a href="/products">All Products</a></li>
             {categories.map((category) => (
               <li>
-                <a href={`/products#${category.id}`}>
+                <a href={`/${category.slug}`}>
                   <Icon name={category.icon} class="menu-icon" />
                   {category.title}
                 </a>

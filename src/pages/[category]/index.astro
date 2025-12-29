@@ -22,9 +22,30 @@ const weights = [...new Set(categoryProducts.map(p => p.weight))].filter(Boolean
 const prices = categoryProducts.map(p => p.price);
 const minPrice = prices.length ? Math.min(...prices) : 0;
 const maxPrice = prices.length ? Math.max(...prices) : 0;
+
+const schema = {
+  "@context": "https://schema.org",
+  "@type": "CollectionPage",
+  "name": category.name,
+  "description": category.description,
+  "url": Astro.url.href,
+  "mainEntity": {
+    "@type": "ItemList",
+    "itemListElement": categoryProducts.map((product, index) => ({
+      "@type": "ListItem",
+      "position": index + 1,
+      "url": new URL(`/${category.slug}/${product.subCategory}/${product.slug}`, Astro.site).href,
+      "name": product.name
+    }))
+  }
+};
 ---
 
-<Layout title={`${category.name} - AgroPro`}>
+<Layout
+  title={`${category.name} - Premium Feed | AgroPro`}
+  description={category.description}
+  schema={schema}
+>
    <Header />
 
    <div class="page-header" style={category.image ? `background-image: url('${category.image}'); background-size: cover; background-position: center; position: relative;` : ''}>
