@@ -34,7 +34,7 @@ const schema = {
     "itemListElement": categoryProducts.map((product, index) => ({
       "@type": "ListItem",
       "position": index + 1,
-      "url": new URL(`/${category.slug}/${product.subCategory}/${product.slug}`, Astro.site).href,
+      "url": new URL(`/${category.slug}/${product.slug}`, Astro.site).href,
       "name": product.name
     }))
   }
@@ -65,20 +65,6 @@ const schema = {
 
    <div class="section-padding">
       <div class="container">
-         <!-- Subcategories Links -->
-         <div class="row mb-5">
-            <div class="col-md-12">
-               <div class="subcategories-list">
-                  <h3 class="h5 mb-3">Browse by Type:</h3>
-                  <div class="d-flex flex-wrap gap-2">
-                     {category.subCategories.map(sub => (
-                        <a href={`/${category.slug}/${sub.slug}`} class="subcategory-pill">{sub.name}</a>
-                     ))}
-                  </div>
-               </div>
-            </div>
-         </div>
-
          <div class="row">
             <!-- Sidebar -->
             <div class="col-lg-3 mb-4">
@@ -101,9 +87,7 @@ const schema = {
                       ))
                   ) : (
                       <div class="col-12">
-                          <div class="alert alert-info">
-                              No products found in this category yet. Please check back later.
-                          </div>
+                          <p>No products found in this category.</p>
                       </div>
                   )}
                </div>
@@ -114,28 +98,3 @@ const schema = {
 
    <Footer />
 </Layout>
-
-<style>
-   .page-header {
-      background: #f8f9fa;
-      padding: 60px 0 30px;
-   }
-
-   .subcategory-pill {
-      display: inline-block;
-      padding: 8px 20px;
-      background: #fff;
-      border: 1px solid #ddd;
-      border-radius: 25px;
-      color: #264653;
-      text-decoration: none;
-      transition: all 0.2s;
-      font-size: 0.9rem;
-   }
-
-   .subcategory-pill:hover {
-      background: #e9c46a;
-      border-color: #e9c46a;
-      color: #fff;
-   }
-</style>

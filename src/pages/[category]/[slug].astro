@@ -1,0 +1,357 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Header from '../../components/Header.astro';
+import Footer from '../../components/Footer.astro';
+import { products, categories } from '../../data/products';
+import { Icon } from 'astro-icon/components';
+
+export function getStaticPaths() {
+  return products.map(product => ({
+    params: {
+      category: product.topCategory,
+      slug: product.slug
+    },
+    props: { product },
+  }));
+}
+
+const { product } = Astro.props;
+
+// Find category name for breadcrumbs
+const category = categories.find(c => c.slug === product.topCategory);
+
+const schema = {
+  "@context": "https://schema.org",
+  "@type": "Product",
+  "name": product.name,
+  "image": new URL(product.image, Astro.site).href,
+  "description": product.description,
+  "brand": {
+    "@type": "Brand",
+    "name": "AgroPro"
+  },
+  "offers": {
+    "@type": "Offer",
+    "url": Astro.url.href,
+    "priceCurrency": "USD",
+    "price": product.price,
+    "availability": "https://schema.org/InStock",
+    "itemCondition": "https://schema.org/NewCondition"
+  }
+};
+---
+
+<Layout
+  title={`${product.name} - ${category?.name} | AgroPro`}
+  description={product.details}
+  image={product.image}
+  type="product"
+  schema={schema}
+>
+   <Header />
+
+   <div class="product-detail-page section-padding">
+      <div class="container">
+         <!-- Breadcrumbs -->
+         <nav aria-label="breadcrumb" class="mb-4">
+            <ol class="breadcrumb bg-transparent p-0">
+                <li class="breadcrumb-item"><a href="/">Home</a></li>
+                <li class="breadcrumb-item"><a href={`/${category?.slug}`}>{category?.name}</a></li>
+                <li class="breadcrumb-item active" aria-current="page">{product.name}</li>
+            </ol>
+         </nav>
+
+         <!-- Top Section: Image & Key Info -->
+         <div class="row g-5 mb-5">
+            <!-- Left Column: Image -->
+            <div class="col-lg-6">
+               <div class="product-image-wrapper">
+                  {product.image ? (
+                      <img src={product.image} alt={product.name} class="img-fluid rounded shadow-sm w-100" />
+                  ) : (
+                      <div class="no-image-placeholder rounded shadow-sm">
+                          <Icon name="mdi:image-off" size={64} color="#adb5bd" />
+                          <span>No Image Available</span>
+                      </div>
+                  )}
+               </div>
+            </div>
+
+            <!-- Right Column: Product Info -->
+            <div class="col-lg-6">
+               <div class="product-info-wrapper">
+                  <h1 class="product-title mb-2">{product.name}</h1>
+
+                  <div class="price-block mb-4">
+                     <span class="price h2 text-primary fw-bold">${product.price.toFixed(2)}</span>
+                     <span class="unit text-muted"> / {product.weight}</span>
+                     <div class="min-order badge bg-light text-dark border mt-2">
+                        Min Order: {product.minQuantity || product.weight}
+                     </div>
+                  </div>
+
+                  <div class="action-buttons mb-4">
+                     <a href={`/contact?product=${encodeURIComponent(product.name)}`} class="btn btn-primary btn-lg w-100 shadow-sm">
+                        Send Enquiry <Icon name="mdi:email-outline" class="ms-2" />
+                     </a>
+                  </div>
+
+                  <div class="composition-box bg-light p-3 rounded mb-4 border">
+                     <h5 class="mb-3 fw-bold">Composition Highlights</h5>
+                     <div class="row g-2">
+                        <div class="col-6">
+                           <div class="d-flex align-items-center">
+                              <Icon name="mdi:paw" class="text-secondary me-2" />
+                              <span><strong>Animal:</strong> {product.animal}</span>
+                           </div>
+                        </div>
+                        <div class="col-6">
+                           <div class="d-flex align-items-center">
+                              <Icon name="mdi:chart-line" class="text-secondary me-2" />
+                              <span><strong>Life Stage:</strong> {product.lifeStage}</span>
+                           </div>
+                        </div>
+                        <div class="col-6">
+                           <div class="d-flex align-items-center">
+                              <Icon name="mdi:flash" class="text-secondary me-2" />
+                              <span><strong>Protein:</strong> {product.protein}</span>
+                           </div>
+                        </div>
+                        {product.energy && (
+                           <div class="col-6">
+                              <div class="d-flex align-items-center">
+                                 <Icon name="mdi:lightning-bolt" class="text-secondary me-2" />
+                                 <span><strong>Energy:</strong> {product.energy}</span>
+                              </div>
+                           </div>
+                        )}
+                     </div>
+                  </div>
+
+                  {product.benefits && (
+                      <div class="benefits-section">
+                          <h5 class="fw-bold mb-3">Key Benefits</h5>
+                          <ul class="list-unstyled">
+                              {product.benefits.map(benefit => (
+                                  <li class="mb-2 d-flex align-items-start">
+                                      <Icon name="mdi:check-circle" class="text-success me-2 mt-1 flex-shrink-0" />
+                                      <span>{benefit}</span>
+                                  </li>
+                              ))}
+                          </ul>
+                      </div>
+                  )}
+               </div>
+            </div>
+         </div>
+
+         <!-- Bottom Section: Long Description & FAQs -->
+         <div class="row g-5">
+            <div class="col-lg-8">
+               <div class="long-description mb-5">
+                  <h2 class="section-title mb-4">Product Description</h2>
+                  <div class="prose" set:html={product.longDescription || `<p>${product.description}</p><p>${product.details}</p>`} />
+
+                  {product.feedingGuide && (
+                     <div class="feeding-guide mt-5 p-4 bg-light rounded border">
+                        <h3 class="h4 mb-3">Feeding Guide</h3>
+                        <div set:html={product.feedingGuide} />
+                     </div>
+                  )}
+               </div>
+
+               {/* Specifications Table (Optional, kept for detail completeness) */}
+               <div class="specs-table mb-5">
+                  <h3 class="h5 mb-3 text-muted text-uppercase ls-1">Technical Specifications</h3>
+                  <table class="table table-bordered">
+                      <tbody>
+                          <tr><th class="bg-light w-25">Weight</th><td>{product.weight}</td></tr>
+                          <tr><th class="bg-light">Packaging</th><td>{product.packaging.join(', ')}</td></tr>
+                          {product.ingredients && <tr><th class="bg-light">Ingredients</th><td>{product.ingredients}</td></tr>}
+                      </tbody>
+                  </table>
+               </div>
+            </div>
+
+            <div class="col-lg-4">
+               {product.faqs && product.faqs.length > 0 && (
+                   <div class="faq-section sticky-top" style="top: 100px; z-index: 1;">
+                       <h3 class="h4 mb-4">Frequently Asked Questions</h3>
+                       <div class="accordion home-accordion" id="productFaq">
+                           {product.faqs.map((faq, index) => (
+                               <div class="card home-accordion__item">
+                                   <div class="card-header" id={`heading${index}`}>
+                                       <h3 class="mb-0">
+                                           <button
+                                               class={`btn btn-link home-accordion__button ${index !== 0 ? 'collapsed' : ''}`}
+                                               type="button"
+                                               data-toggle="collapse"
+                                               data-target={`#collapse${index}`}
+                                               aria-expanded={`${index === 0}`}
+                                               aria-controls={`collapse${index}`}
+                                           >
+                                               <span class="home-accordion__q">
+                                                   <span class="home-accordion__qBadge" aria-hidden="true">Q{String(index + 1).padStart(2, '0')}</span>
+                                                   {faq.question}
+                                               </span>
+                                           </button>
+                                       </h3>
+                                   </div>
+                                   <div
+                                       id={`collapse${index}`}
+                                       class={`collapse ${index === 0 ? 'show' : ''}`}
+                                       aria-labelledby={`heading${index}`}
+                                       data-parent="#productFaq"
+                                   >
+                                       <div class="card-body home-accordion__body">
+                                           <div class="home-accordion__answer">{faq.answer}</div>
+                                       </div>
+                                   </div>
+                               </div>
+                           ))}
+                       </div>
+                   </div>
+               )}
+            </div>
+         </div>
+
+      </div>
+   </div>
+
+   <Footer />
+</Layout>
+
+<style>
+   .product-image-wrapper {
+      position: relative;
+      overflow: hidden;
+      border-radius: 8px;
+   }
+
+   .no-image-placeholder {
+      width: 100%;
+      height: 400px;
+      background: #f8f9fa;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      color: #adb5bd;
+   }
+
+   .price {
+      color: #264653;
+   }
+
+   .text-primary {
+      color: #2a9d8f !important;
+   }
+
+   .btn-primary {
+      background-color: #2a9d8f;
+      border-color: #2a9d8f;
+      padding: 12px 24px;
+      font-weight: 600;
+      transition: all 0.3s;
+   }
+
+   .btn-primary:hover {
+      background-color: #21867a;
+      border-color: #21867a;
+      transform: translateY(-2px);
+   }
+
+   .section-title {
+      position: relative;
+      padding-bottom: 15px;
+      margin-bottom: 25px;
+      font-weight: 700;
+      color: #264653;
+   }
+
+   .section-title::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 60px;
+      height: 3px;
+      background: #e9c46a;
+   }
+
+   .prose {
+      line-height: 1.8;
+      color: #555;
+   }
+
+   .home-accordion {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+   }
+
+   .home-accordion__item {
+      border: 1px solid rgba(38, 70, 83, 0.12);
+      border-radius: 12px;
+      overflow: hidden;
+      background: #fff;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.03);
+      transition: all 0.2s ease;
+   }
+
+   .home-accordion__item:hover {
+      border-color: #2a9d8f;
+      box-shadow: 0 6px 18px rgba(0, 0, 0, 0.06);
+   }
+
+   .home-accordion__button {
+      width: 100%;
+      text-align: left;
+      padding: 18px 24px;
+      color: #264653;
+      font-weight: 700;
+      font-size: 1.05rem;
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      transition: background 0.2s;
+   }
+
+   .home-accordion__button:hover,
+   .home-accordion__button:focus {
+      text-decoration: none;
+      background: rgba(42, 157, 143, 0.04);
+   }
+
+   .home-accordion__button:not(.collapsed) {
+      background: rgba(42, 157, 143, 0.08);
+      color: #2a9d8f;
+   }
+
+   .home-accordion__q {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+   }
+
+   .home-accordion__qBadge {
+      background: rgba(38, 70, 83, 0.08);
+      color: #264653;
+      font-size: 0.75rem;
+      font-weight: 800;
+      padding: 4px 8px;
+      border-radius: 6px;
+      letter-spacing: 0.6px;
+      flex: 0 0 auto;
+   }
+
+   .home-accordion__body {
+      color: rgba(38, 70, 83, 0.88);
+      line-height: 1.7;
+   }
+
+   .ls-1 {
+      letter-spacing: 1px;
+   }
+</style>

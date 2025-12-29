@@ -38,7 +38,7 @@ const schema = {
     "itemListElement": filteredProducts.map((product, index) => ({
       "@type": "ListItem",
       "position": index + 1,
-      "url": new URL(`/${product.topCategory}/${product.subCategory}/${product.slug}`, Astro.site).href,
+      "url": new URL(`/${product.topCategory}/${product.slug}`, Astro.site).href,
       "name": product.name
     }))
   }

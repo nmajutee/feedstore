@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://agropro-feed.com/sitemap-index.xml
